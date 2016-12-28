@@ -1,0 +1,16 @@
+<!-- Main Page Structure. -->
+<md-sidenav-layout fullscreen class="dashboard-sidenav-layout">
+
+    <!-- Side Panel Component. -->
+    <md-sidenav #navSideBar mode='side' opened=true color='primary'>
+        <!-- Left Panel of Dashboard -->
+        <dashboard-menu-nav-panel></dashboard-menu-nav-panel>
+    </md-sidenav>
+
+    <!-- Top Panel of Dashboard -->
+    <dashboard-top-panel> </dashboard-top-panel>
+
+    <!-- Routed views go here. When routing goes through Menu Navigation. -->
+    <router-outlet></router-outlet>
+
+</md-sidenav-layout>
