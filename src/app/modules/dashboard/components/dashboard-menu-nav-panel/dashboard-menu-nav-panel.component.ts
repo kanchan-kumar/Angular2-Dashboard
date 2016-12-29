@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardMenuNavigatorService } from '../../services/dashboard-menu-navigator.service';
 import { Logger } from 'angular2-logger/core';
-import { DashboardMenuDef } from '../../constants/dashboard-menu-def';
-import { DashboardNavMenu } from '../../constants/dashboard-nav-menu';
+import { DashboardMenuDef } from '../../containers/dashboard-menu-def';
+import { DashboardNavMenu } from '../../containers/dashboard-nav-menu';
 
 @Component({
   selector: 'dashboard-menu-nav-panel',
@@ -19,8 +19,14 @@ export class DashboardMenuNavPanelComponent implements OnInit {
   productType: string = 'netstorm';
 
   constructor(private log: Logger, private _menuNavService: DashboardMenuNavigatorService, private _navMenu: DashboardNavMenu) {
-    this.arrNavMenu = _navMenu.getNavMenuByProductType(this.productType);
+    this.arrNavMenu = _navMenu.getNavMenuByProductType(this.productType, this.onMenuClick);
     log.debug('Menu Definition Array = ', this.arrNavMenu);
+  }
+
+  /*Menu Click Event Handler. */
+  onMenuClick(event) {
+      console.log(event);
+      console.log(event.item.label);
   }
 
   ngOnInit() {

@@ -1,6 +1,6 @@
 import { Component, ViewChild, Input, OnInit } from '@angular/core';
 import {Logger} from 'angular2-logger/core';
-import { DashboardMenuDef } from '../../constants/dashboard-menu-def';
+import { DashboardMenuDef } from '../../containers/dashboard-menu-def';
 
 @Component({
   selector: 'dashboard-nav-menu',

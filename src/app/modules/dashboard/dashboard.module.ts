@@ -23,6 +23,7 @@ import { DashboardTreePanelComponent } from './components/dashboard-tree-panel/d
 import { DashboardLowerTabularPanelComponent } from './components/dashboard-lower-tabular-panel/dashboard-lower-tabular-panel.component';
 import { DashboardRightPanelContainerComponent } from './components/dashboard-right-panel-container/dashboard-right-panel-container.component';
 import { DashboardNavMenuComponent } from './components/dashboard-nav-menu/dashboard-nav-menu.component';
+import { DashboardWidgetComponent } from './components/dashboard-widget/dashboard-widget.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { DashboardNavMenuComponent } from './components/dashboard-nav-menu/dashb
     DashboardLowerTabularPanelComponent,
     DashboardRightPanelContainerComponent,
     DashboardNavMenuComponent,
+    DashboardWidgetComponent,
   ],
   imports: [
     BrowserModule,

@@ -6,17 +6,17 @@ export class DashboardMenuDef implements MenuItem {
  items: DashboardMenuDef[] = null;
  command?: (event?: any) => void;
 
-  constructor( name: string, icon: string, arrSubMenu: DashboardMenuDef[]) {
+  constructor( name: string, icon: string, arrSubMenu: DashboardMenuDef[], onMenuClick) {
     this.label = name;
     this.icon = icon;
     this.items = arrSubMenu;
 
     /* Event for Only Leaf Nodes.*/
-    // this.command = (event) => this.onMenuClick(event);
+    this.command = (event) => onMenuClick(event);
   }
 
-  commandEvt(menuClick) {
-    this.command = (event) => menuClick(event);
+ commandEvt(onMenuClick) {
+    this.command = (event) => onMenuClick(event);
   }
 
   get menuName(): string {
