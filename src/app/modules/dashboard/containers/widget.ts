@@ -2,6 +2,11 @@
 import { NgGridItemConfig } from 'angular2-grid';
 
 export class Widget implements NgGridItemConfig {
+
+    widgetId: number;
+    widgetType: number;
+    widgetName: string;
+    widgetDescription: string;
     payload: any = null;
     col: number = 1;
     row: number = 1;

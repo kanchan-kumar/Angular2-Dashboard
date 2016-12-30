@@ -1,3 +1,9 @@
-<p>
-  dashboard-right-panel-container works!
-</p>
+<!-- Layout  -->
+<div [ngGrid]="layoutSettings">
+
+    <!-- Now Creating Widgets -->
+    <div *ngFor="let widget of widgets">
+        <!-- Insert widget component here. -->
+        <dashboard-widget [widget]="widget"> </dashboard-widget>
+    </div>
+</div>

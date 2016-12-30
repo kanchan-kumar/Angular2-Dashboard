@@ -25,8 +25,8 @@ export class DashboardMenuNavPanelComponent implements OnInit {
 
   /*Menu Click Event Handler. */
   onMenuClick(event) {
-      console.log(event);
-      console.log(event.item.label);
+      this.log.debug(event);
+      this.log.debug(event.item.label);
   }
 
   ngOnInit() {
