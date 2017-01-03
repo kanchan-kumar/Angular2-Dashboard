@@ -8,9 +8,10 @@
         <!-- Top Panel Information -->
 
         <!-- Favorite Icon -->
-        <md-icon fontSet='fa' fontIcon='fa-star' class='dashboard-top-nav-icon'></md-icon>
+        <!-- <md-icon fontSet='fa' fontIcon='fa-star' class='dashboard-top-nav-icon'></md-icon>
         <p-menu #favMenu popup='popup' [model]='favOptions'>Favorites</p-menu>
-        <button md-button class='dashboard-nav-button' (click)="favMenu.toggle($event)"> Favorites </button>
+        <button md-button class='dashboard-nav-button' (click)="favMenu.toggle($event)"> Favorites </button> -->
+        <p-splitButton label="Favorites" icon="fa-star" (onClick)="onFavClickAction()" [model]="favOptions" class="dashboard-top-panel-fav-option"></p-splitButton>
 
         <!-- Last Sample Time -->
         <md-icon fontSet='fa' fontIcon='fa-clock-o' class='dashboard-top-nav-icon'></md-icon>

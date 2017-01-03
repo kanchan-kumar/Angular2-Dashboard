@@ -54,14 +54,15 @@ export class DashboardWidgetDataService {
         this.widgets[i] = new Widget();
 
         /* Copying the widget definition from layout. */
-        this.widgets[i].row = widget.row;
-        this.widgets[i].col = widget.col;
+        this.widgets[i].row = widget.row + 1;
+        this.widgets[i].col = widget.col + 1;
         this.widgets[i].sizex = widget.sizeX;
         this.widgets[i].sizey = widget.sizeY;
         this.widgets[i].widgetId = widget.widgetId;
         this.widgets[i].widgetType = widget.widgetType;
         this.widgets[i].widgetName = widget.name;
         this.widgets[i].widgetDescription = widget.description;
+        this.widgets[i].payload = 'object:' + i;
       }
     } catch (e) {
       this.log.error('Error while creating/updating dashboard widgets.', e);

@@ -63,6 +63,15 @@ export class DashboardRightPanelContainerComponent implements OnInit, OnDestroy 
     }
   }
 
+  /* Event comes when any widget resized. */
+  onResizeStop(itemConfig) {
+    try {
+      this.log.debug('Resize stopped of grid with widgetId = ' + itemConfig._config.widgetId);
+    } catch (e) {
+      this.log.error('Error while processing the widget resize event', e);
+    }
+  }
+
   ngOnDestroy() {
     this.dataSubscription.unsubscribe();
   }

@@ -14,6 +14,57 @@
 }
 
 
+/* --------------------------------------- ScrollBar CSS -----------------------------------*/
+
+.scroll {
+    width: 20px;
+    height: 200px;
+    overflow: auto;
+    float: left;
+}
+
+.scroll_content::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.scroll_content::-webkit-scrollbar-thumb {
+    background: #666;
+    border-radius: 20px;
+}
+
+.scroll_content::-webkit-scrollbar-track {
+    background: #ddd;
+    border-radius: 20px;
+}
+
+
+/* -------------------------------------- Common CSS for font-size ----------------------------------*/
+
+.label-font {
+    font-size: 12px;
+}
+
+
+/* ---------------------------------------------------- UI Grid CSS --------------------------------------------------------- */
+
+.grid {
+    position: relative;
+}
+
+.grid-item {
+    position: absolute;
+}
+
+.grid-item.moving {
+    z-index: z-index + 1;
+}
+
+.placeholder {
+    position: absolute;
+}
+
+
 /*  ----------------------------------------------------Prime NG Global CSS ------------------------------------------------- */
 
 body {

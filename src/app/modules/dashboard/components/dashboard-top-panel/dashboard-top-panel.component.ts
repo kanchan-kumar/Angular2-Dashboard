@@ -16,8 +16,8 @@ export class DashboardTopPanelComponent implements OnInit {
   constructor(private _menuNavService: DashboardMenuNavigatorService) {
 
     this.favOptions = [
-            {label: 'Refresh', icon: 'fa-plus'},
-            {label: 'Update', icon: 'fa-download'}
+            {label: 'Refresh', icon: 'fa-refresh'},
+            {label: 'Update', icon: 'fa-share-square'}
           ];
   }
 

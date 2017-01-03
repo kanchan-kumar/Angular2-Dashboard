@@ -1,5 +1,5 @@
 <!-- Layout  -->
-<div [ngGrid]="layoutSettings">
+<div [ngGrid]="layoutSettings" [ngClass]="['scroll', 'scroll_content']" (onResizeStop)="onResizeStop($event)">
 
     <!-- Now Creating Widgets -->
     <div *ngFor="let widget of widgets">

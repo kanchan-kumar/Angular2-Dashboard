@@ -1,4 +1,15 @@
-<div [(ngGridItem)]="widget">
-    <div class="title">{{widget.widgetId}</div>
-    <p>abcd</p>
+<div [(ngGridItem)]="widget" class="dashboard-panel dashboard-panel-color" (onChangeStop)="onChangeStop($event)">
+    <header class="dashboard-panel-header-color dashboard-panel-header">
+        <div class="ui-helper-clearfix label-font">
+            <span class="ui-panel-title">Custom Header</span>
+            <md-icon class="dashboard-panel-close-icon panel-action-button" fontSet='fa' fontIcon='fa-times' (click)="closeWidget()"></md-icon>
+            <md-icon class="dashboard-panel-setting-icon panel-action-button" fontSet='fa' fontIcon='fa-cog' (click)="closeWidget()"></md-icon>
+            <md-icon class="dashboard-panel-expand-icon panel-action-button" fontSet='fa' fontIcon='fa-expand' (click)="closeWidget()"></md-icon>
+        </div>
+    </header>
+    <div class="dashboard-panel-data">
+        <div class="dashboard-graph-widget">
+            <chart [options]="chart"></chart>
+        </div>
+    </div>
 </div>

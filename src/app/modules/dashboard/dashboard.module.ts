@@ -4,9 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from '@angular/material';
-import { TieredMenuModule, MenuModule, MenubarModule } from 'primeng/primeng';
+import { TieredMenuModule, MenuModule, MenubarModule, PanelModule, ButtonModule, SplitButtonModule } from 'primeng/primeng';
 import { Logger, Options as LoggerOptions, Level as LoggerLevel } from 'angular2-logger/core';
 import { NgGridModule } from 'angular2-grid';
+import { ChartModule } from 'angular2-highcharts';
 
 /* Import routes configuration. */
 import {DASHBOARD_ROUTES} from './routes/dashboard.routes';
@@ -48,10 +49,14 @@ import { DashboardWidgetComponent } from './components/dashboard-widget/dashboar
     HttpModule,
     MaterialModule.forRoot(),
     RouterModule.forRoot(DASHBOARD_ROUTES),
+    ChartModule,
     TieredMenuModule,
     MenuModule,
     MenubarModule,
     NgGridModule,
+    PanelModule,
+    ButtonModule,
+    SplitButtonModule,
   ],
   providers: [
     { provide: LoggerOptions, useValue: { level: LoggerLevel.DEBUG } },

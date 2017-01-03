@@ -14,7 +14,7 @@
         "prefix": "dashboard",
         "mobile": false,
         "styles": [
-			"resources/themes/omega/theme.css",
+            "resources/themes/omega/theme.css",
             "../node_modules/font-awesome/css/font-awesome.min.css",
             "../node_modules/primeng/resources/primeng.min.css",
             "resources/themes/default/default.scss",

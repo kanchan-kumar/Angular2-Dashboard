@@ -3,4 +3,7 @@
         width: 80px;
         overflow: initial;
     }
+    md-sidenav /deep/ .cdk-focus-trap-content {
+        overflow-y: initial;
+    }
 }
