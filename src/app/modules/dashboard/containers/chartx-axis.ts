@@ -3,7 +3,6 @@ export class ChartxAxis {
   alternateGridColor: string = null;
   breaks: Object = null;
   categories: Array<String> = null;
-  ceiling: number = 0;
   className: string = null;
   crosshair: Object = null;
   dateTimeLabelFormats: Object = null;

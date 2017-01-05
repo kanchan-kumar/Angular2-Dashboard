@@ -20,6 +20,9 @@ export class DashboardRightPanelContainerComponent implements OnInit, OnDestroy 
   /* Widgets Definition Array. */
   private widgets: Widget[];
 
+  /* Flag for Single Panel View Mode. */
+  private isSinglePanelView: boolean = false;
+
   /* Layout Settings. */
   private layoutSettings: WidgetConfiguration;
 
@@ -29,7 +32,10 @@ export class DashboardRightPanelContainerComponent implements OnInit, OnDestroy 
 
   ngOnInit() {
     try {
-      this.dataSubscription = this._dataService.favoriteDataObservable$.subscribe(action => { this.updateLayoutAndGraphs(action); });
+      this.dataSubscription = this._dataService.favoriteDataObservable$.subscribe(
+        action => {
+          this.updateLayoutAndGraphs(action);
+      });
 
     } catch (e) {
       this.log.error('Error while initializing dashboard right panel component.', e);
@@ -48,6 +54,9 @@ export class DashboardRightPanelContainerComponent implements OnInit, OnDestroy 
 
         /* Updating Layout widgets in favorite update. */
         this._widgetService.processLayoutWidgets();
+
+        /* Now processing graphs on panel. */
+        this._widgetService.processFavoriteGraphData();
 
         /* Getting Layout Settings. */
         this.layoutSettings = this._widgetService.getWidgetConfiguration();

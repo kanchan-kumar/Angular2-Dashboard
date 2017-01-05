@@ -1,5 +1,5 @@
 export class ChartSeries {
-  type: string = 'spline';
+  type: string = null;
   allowPointSelect: boolean = false;
   animation: boolean = true;
   className: string = null;

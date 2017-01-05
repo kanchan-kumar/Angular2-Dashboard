@@ -15,5 +15,5 @@ export interface DashboardFavoritePanelInfo {
   errorCode: number;
   isMinMaxGraph: boolean;
   showLegendOnWidget: boolean;
-  legendAlignmentOnWidget: boolean;
+  legendAlignmentOnWidget: string;
 }

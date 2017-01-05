@@ -1,6 +1,7 @@
 import { ChartEvents } from './chart-events';
 
 export class ChartOptions {
+  type: string = 'spline';
   alignTicks: boolean = true;
   animation: boolean = true;
   backgroundColor: string = 'transparent';
@@ -21,8 +22,8 @@ export class ChartOptions {
   showAxes: boolean = false;
   spacing: number[] = [10, 10, 15, 10];
   style: any = null;
-  type: string = 'line';
-  width: number = null;
+  width: number = 150;
+  height: number = 120;
   zoomType: string = 'none';
   events: ChartEvents = null;
 }

@@ -44,7 +44,7 @@ export class ChartyAxis {
   tickLength: number = 10;
   tickPosition: string = 'outside';
   tickWidth: number = 0;
-  title: Object = null;
+  title: Object = {margin: 5, text: ''};
   type: string = 'linear';
   visible: boolean = true;
 }
