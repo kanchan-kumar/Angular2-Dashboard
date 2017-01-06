@@ -4,11 +4,11 @@
     <!-- Now Creating Widgets -->
     <div *ngFor="let widget of widgets">
         <!-- Insert widget component here. -->
-        <dashboard-widget [widget]="widget"> </dashboard-widget>
+        <dashboard-widget [widget]="widget" (widgetAction)="onWidgetAction($event)"> </dashboard-widget>
     </div>
 </div>
 
 <!-- Single Panel View Mode- -->
 <div [style.display]="isSinglePanelView?'inherit':'none'">
-    <dashboard-one-panel-view></dashboard-one-panel-view>
+    <dashboard-one-panel-view [widgetInputs]="singlePanelViewInputs" (widgetAction)="onWidgetAction($event)"></dashboard-one-panel-view>
 </div>

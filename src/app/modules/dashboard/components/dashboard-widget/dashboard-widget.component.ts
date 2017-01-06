@@ -1,9 +1,10 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
 import { Widget } from '../../containers/widget';
 import { Logger } from 'angular2-logger/core';
-import { Chart } from '../../containers/chart';
 import { DashboardPanelData } from '../../containers/dashboard-panel-data';
 import { DashboardWidgetDataService } from '../../services/dashboard-widget-data.service';
+import { WIDGET_MAXIMIZE, WIDGET_CLOSE } from '../../constants/actions.constants';
+import { WidgetActionInputs } from '../../containers/widget-action-inputs';
 
 @Component({
   selector: 'dashboard-widget',
@@ -23,6 +24,9 @@ export class DashboardWidgetComponent implements OnInit {
 
   /* Panel Data Object Here. */
   panelData: DashboardPanelData = null;
+
+  /* Emitting values to the parent on widget operation. */
+  @Output() widgetAction: EventEmitter<any> = new EventEmitter();
 
   constructor(private log: Logger, private _widgetDataService: DashboardWidgetDataService) { }
 
@@ -61,6 +65,50 @@ export class DashboardWidgetComponent implements OnInit {
 
     } catch (e) {
       this.log.error('Error while resizing chart on panel', e);
+    }
+  }
+
+  /**
+   * Handling event of widget maximize.
+   */
+  onWidgetMaximize() {
+    try {
+
+      this.log.debug('Going to maximize the widget with widget id = ' + this.widget.widgetId);
+
+      /* Creating instance of widget inputs. */
+      let widgetInputs = new WidgetActionInputs();
+      widgetInputs.panelData = this.panelData;
+      widgetInputs.widget = this.widget;
+      widgetInputs.widgetAction = WIDGET_MAXIMIZE;
+
+      /* Emitting the action here to parent component. */
+      this.widgetAction.emit(widgetInputs);
+
+    } catch (e) {
+      this.log.error('Error while maximizing the widget in widget component.', e);
+    }
+  }
+
+  /**
+   * Handling event of widget close action.
+   */
+  onWidgetClose() {
+    try {
+
+      this.log.debug('Going to close the widget with widget id = ' + this.widget.widgetId);
+
+      /* Creating instance of widget inputs. */
+      let widgetInputs = new WidgetActionInputs();
+      widgetInputs.panelData = this.panelData;
+      widgetInputs.widget = this.widget;
+      widgetInputs.widgetAction = WIDGET_CLOSE;
+
+      /* Emitting the action here to parent component. */
+      this.widgetAction.emit(widgetInputs);
+
+    } catch (e) {
+      this.log.error('Error while closing the widget in widget component.', e);
     }
   }
 

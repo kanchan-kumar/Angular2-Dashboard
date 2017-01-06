@@ -60,10 +60,12 @@ export class DashboardChartProviderService {
 
       /* Creating Chart Title for Line Chart. */
       let title = new ChartTitle();
-      title.text = null;
+      title.text = '';
 
       /* Creating Chart Options value. */
       let chartOptions = new ChartOptions();
+      chartOptions.width = 500;
+      chartOptions.height = 500;
 
       /* Creating Chart Legend Here. */
       let legend = new ChartLegend();
@@ -72,10 +74,17 @@ export class DashboardChartProviderService {
       /* Creating Y Axis Here. */
       let yAxis = new ChartyAxis();
 
+      /* Creating DataSet For Line Chart. */
+      let chartSeries = new ChartSeries();
+      chartSeries.data = [];
+
       /* Setting chart object. */
       emptyChart.chart = chartOptions;
       emptyChart.title = title;
       emptyChart.yAxis = yAxis;
+      emptyChart.series = [chartSeries];
+      emptyChart.legend = legend;
+      emptyChart.lang = {noData: 'Data not available.'};
 
       return emptyChart;
     } catch (e) {

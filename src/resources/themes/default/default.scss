@@ -20,8 +20,17 @@ md-sidenav div {
 .dashboard-panel-header-color {
     color: black;
     border-color: black;
+    background: rgba(121, 121, 185, 0.12);
 }
 
 .dashboard-panel-color {
-    color: transparent;
+    background: rgb(223, 234, 232);
+}
+
+.md-sidenav-container {
+    background: transparent;
+}
+
+body {
+    background: url(images/background.jpg) repeat;
 }

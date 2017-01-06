@@ -6,6 +6,8 @@ import { DashboardWidgetDataService } from '../../services/dashboard-widget-data
 import { Widget } from '../../containers/widget';
 import { WidgetConfiguration } from '../../containers/widget-configuration';
 import { FAVORITE_UPDATE_AVAILABLE } from '../../constants/actions.constants';
+import { WidgetActionInputs } from '../../containers/widget-action-inputs';
+import { WIDGET_MAXIMIZE, WIDGET_MINIMIZE, WIDGET_CLOSE } from '../../constants/actions.constants';
 
 @Component({
   selector: 'dashboard-right-panel-container',
@@ -25,6 +27,9 @@ export class DashboardRightPanelContainerComponent implements OnInit, OnDestroy 
 
   /* Layout Settings. */
   private layoutSettings: WidgetConfiguration;
+
+  /* One/Single Panel View input object. */
+  private singlePanelViewInputs: WidgetActionInputs = null;
 
   constructor(private log: Logger, private _dataService: DashboardDataContainerService,
   private _widgetService: DashboardWidgetDataService) {
@@ -69,6 +74,45 @@ export class DashboardRightPanelContainerComponent implements OnInit, OnDestroy 
 
     } catch (e) {
       this.log.error('Error while updating data in right panel widgets', e);
+    }
+  }
+
+  /**
+   * Method called for any widget action.
+   */
+  onWidgetAction(action: WidgetActionInputs) {
+    try {
+      this.log.debug('Handling widget action with widget id = ' + action.widget.widgetId + ', action = ' + action.widgetAction);
+
+      /* Checking for actions. */
+      switch (action.widgetAction) {
+        case WIDGET_MAXIMIZE:
+          this.isSinglePanelView = true;
+          this.singlePanelViewInputs = action;
+          break;
+        case WIDGET_CLOSE:
+          this.onCloseWidget(action);
+          break;
+        case WIDGET_MINIMIZE:
+          this.isSinglePanelView = false;
+          break;
+        default:
+          this.log.debug('Unknown/Unhandled widget action type found. Action type = ' + action.widgetAction);
+      }
+
+    } catch (e) {
+      this.log.error('Error while handling widget operation.', e);
+    }
+  }
+
+  /**
+   * Method is used for handling widget close operation.
+   */
+  onCloseWidget(action: WidgetActionInputs) {
+    try {
+      this.log.debug('Going to close widget with widget id = ' + action.widget.widgetId);
+    } catch (e) {
+      this.log.error('Error while closing/removing widget.', e);
     }
   }
 

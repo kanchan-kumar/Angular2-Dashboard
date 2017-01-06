@@ -16,6 +16,7 @@ export class Chart {
   legend: ChartLegend = null;
   series: ChartSeries[] = null;
   tooltip: ChartTooltip = null;
+  lang: Object = null;
   credits: Object = {enabled: false};
 
   constructor() {

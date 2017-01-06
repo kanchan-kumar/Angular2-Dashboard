@@ -9,6 +9,7 @@ import { DashboardDataValidatorService } from '../services/dashboard-data-valida
 import { WidgetType } from '../constants/widget-type.enum';
 import { DashboardFavoriteData } from '../interfaces/dashboard-favorite-data';
 import { DashboardChartProviderService } from './dashboard-chart-provider.service';
+import { Chart } from '../containers/chart';
 
 @Injectable()
 export class DashboardWidgetDataService {
@@ -196,6 +197,15 @@ export class DashboardWidgetDataService {
     } catch (e) {
       this.log.error('Error while getting data of panel with panel number = ' + panelNumber, e );
       return null;
+    }
+  }
+
+  /** Getting Empty chart object. */
+  getEmptyChart(): Chart {
+    try {
+      return this._chartProvider.getEmptyChart();
+    } catch (e) {
+      this.log.error('Error while getting empty chart object.', e);
     }
   }
 
