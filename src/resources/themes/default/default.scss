@@ -27,7 +27,18 @@ md-sidenav div {
     background: rgb(223, 234, 232);
 }
 
+
+/*For Single Prime UI panel.*/
+
+.ui-panel .ui-panel-content {
+    background: rgb(223, 234, 232);
+}
+
 .md-sidenav-container {
+    background: transparent;
+}
+
+md-card {
     background: transparent;
 }
 

@@ -94,10 +94,17 @@ body {
     width: 8.5em;
 }
 
+.ui-panel .ui-panel-titlebar {
+    padding: 0px;
+}
+
+
+/*  ---------------------------------------------------- Material Global CSS ------------------------------------------------- */
+
 md-sidenav .ui-tieredmenu {
     margin-left: 30px;
 }
 
-.ui-panel .ui-panel-titlebar {
-    padding: 0px;
+md-card-title-text {
+    font-size: 18px;
 }

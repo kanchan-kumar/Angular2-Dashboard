@@ -12,7 +12,7 @@ import { ChartLegend } from '../containers/chart-legend';
 import { ChartTooltip } from '../containers/chart-tooltip';
 import { ChartTitle } from '../containers/chart-title';
 import { ChartPlotOptions } from '../containers/chart-plot-options';
-import { DashboardDataValidatorService } from '../services/dashboard-data-validator.service';
+import { DashboardDataValidaterService } from '../services/dashboard-data-validator.service';
 
 
 /**
@@ -21,7 +21,7 @@ import { DashboardDataValidatorService } from '../services/dashboard-data-valida
 @Injectable()
 export class DashboardChartProviderService {
 
-  constructor(private log: Logger, private _dataVaildator: DashboardDataValidatorService) {
+  constructor(private log: Logger, private _dataVaildator: DashboardDataValidaterService) {
   }
 
   /* Method is used for getting chart based on chart type. */

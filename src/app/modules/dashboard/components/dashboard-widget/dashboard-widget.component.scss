@@ -32,3 +32,33 @@ md-icon {
 .dashboard-panel-expand-icon {
     padding-right: 5px;
 }
+
+.dashboard-data-widget {
+    font-size: 12px;
+    padding-left: 15px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.dashboard-data-widget-title {
+    font-size: 18px;
+}
+
+.dashboard-data-widget-subtitle {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.dashboard-data-widget-icon {
+    font-size: 50px;
+    height: 30px;
+    width: 30px;
+    padding-right: 10px;
+}
+
+.dashboard-data-widget-footer {
+    padding-bottom: 5px;
+    padding-left: 2px;
+    padding-right: 2px;
+}

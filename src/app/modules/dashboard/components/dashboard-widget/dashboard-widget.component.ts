@@ -5,6 +5,7 @@ import { DashboardPanelData } from '../../containers/dashboard-panel-data';
 import { DashboardWidgetDataService } from '../../services/dashboard-widget-data.service';
 import { WIDGET_MAXIMIZE, WIDGET_CLOSE } from '../../constants/actions.constants';
 import { WidgetActionInputs } from '../../containers/widget-action-inputs';
+import { WidgetType } from '../../constants/widget-type.enum';
 
 @Component({
   selector: 'dashboard-widget',
@@ -39,7 +40,6 @@ export class DashboardWidgetComponent implements OnInit {
       /* Now getting panel data. */
       this.panelData = this._widgetDataService.getPanelDataByPanelNumber(this.widget.widgetId);
       this.log.debug('Panel Data = ', this.panelData);
-
     } catch (e) {
       this.log.error('Error while generating widget componnent', e);
     }
@@ -62,6 +62,28 @@ export class DashboardWidgetComponent implements OnInit {
 
         /* Now Resizing chart based on widget width and height. */
         this.nativeChartRef.setSize(currentWidgetWidth, currentWidgetHeight);
+
+    } catch (e) {
+      this.log.error('Error while resizing chart on panel', e);
+    }
+  }
+
+  /* Method is used to resize and fit data widget panel. */
+  resizeAndFitDataWidget() {
+    try {
+
+        this.log.debug('Resize data widget with widgetId = ' + this.widget.widgetId);
+
+        /* Getting Current Widget Width and Height. */
+        let currentWidgetWidth = this.widgetRef['nativeElement'].clientWidth;
+        let currentWidgetHeight = this.widgetRef['nativeElement'].clientHeight;
+
+        this.log.debug('Widget Id = ' + this.widget.widgetId + ', width = ' + currentWidgetWidth + ', height = ' + currentWidgetHeight );
+
+        /* Adjusting height with excluding panel header height. */
+        this.panelData.dataWidget.dataWidgetHeight = (currentWidgetHeight - 20) + 'px';
+
+        /* Now Resizing chart based on widget width and height. */
 
     } catch (e) {
       this.log.error('Error while resizing chart on panel', e);
@@ -130,7 +152,13 @@ export class DashboardWidgetComponent implements OnInit {
   onChangeStop(_item) {
     try {
       this.log.debug('Widget is resized/positioned successfully with widget = ', _item);
-      this.resizeAndFitChartOnPanel();
+
+      if (this.widget.widgetType === WidgetType.GRAPH_TYPE_WIDGET) {
+        this.resizeAndFitChartOnPanel();
+      } else if (this.widget.widgetType === WidgetType.DATA_TYPE_WIDGET) {
+        this.resizeAndFitDataWidget();
+      }
+
     } catch (e) {
       this.log.error('Error while processing resize/drag event of widget', e);
     }

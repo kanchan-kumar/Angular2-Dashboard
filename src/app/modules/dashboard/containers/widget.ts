@@ -1,5 +1,6 @@
 
 import { NgGridItemConfig } from 'angular2-grid';
+import { DataWidgetPropsInfo  } from '../interfaces/data-widget-props-info';
 
 export class Widget implements NgGridItemConfig {
 
@@ -24,6 +25,7 @@ export class Widget implements NgGridItemConfig {
     minRows: number = 0;
     minWidth: number = 0;
     minHeight: number = 0;
+    dataWidget: DataWidgetPropsInfo = null;
 
     constructor() {
     }

@@ -18,8 +18,12 @@ import { DashboardConfigDataService } from './services/dashboard-config-data.ser
 import { DashboardRESTDataAPIService } from './services/dashboard-rest-data-api.service';
 import { DashboardDataContainerService } from './services/dashboard-data-container.service';
 import { DashboardWidgetDataService } from './services/dashboard-widget-data.service';
-import { DashboardDataValidatorService } from './services/dashboard-data-validator.service';
+import { DashboardDataValidaterService } from './services/dashboard-data-validator.service';
 import { DashboardChartProviderService } from './services/dashboard-chart-provider.service';
+import { WidgetDataProcessorService } from './services/widget-data-processor.service';
+
+/* Import Pipes. */
+import { RoundPipe } from 'angular-pipes/src/math/round.pipe';
 
 /* Importing Components. */
 import { DashboardComponent } from './dashboard.component';
@@ -36,6 +40,8 @@ import { DashboardOnePanelViewComponent } from './components/dashboard-one-panel
 
 @NgModule({
   declarations: [
+
+    /*Component. */
     DashboardComponent,
     DashboardTopPanelComponent,
     DashboardMainComponent,
@@ -46,6 +52,9 @@ import { DashboardOnePanelViewComponent } from './components/dashboard-one-panel
     DashboardNavMenuComponent,
     DashboardWidgetComponent,
     DashboardOnePanelViewComponent,
+
+    /* Pipes. */
+    RoundPipe,
   ],
   imports: [
     BrowserModule,
@@ -70,8 +79,9 @@ import { DashboardOnePanelViewComponent } from './components/dashboard-one-panel
     DashboardConfigDataService,
     DashboardDataContainerService,
     DashboardWidgetDataService,
-    DashboardDataValidatorService,
+    DashboardDataValidaterService,
     DashboardChartProviderService,
+    WidgetDataProcessorService,
   ],
   exports: [
     DashboardComponent

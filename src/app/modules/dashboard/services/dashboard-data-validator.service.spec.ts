@@ -1,16 +1,16 @@
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async, inject } from '@angular/core/testing';
-import { DashboardDataValidatorService } from './dashboard-data-validator.service';
+import { DashboardDataValidaterService } from './dashboard-data-validator.service';
 
 describe('DashboardDataValidatorService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [DashboardDataValidatorService]
+      providers: [DashboardDataValidaterService]
     });
   });
 
-  it('should ...', inject([DashboardDataValidatorService], (service: DashboardDataValidatorService) => {
+  it('should ...', inject([DashboardDataValidaterService], (service: DashboardDataValidaterService) => {
     expect(service).toBeTruthy();
   }));
 });

@@ -5,11 +5,12 @@ import { WidgetConfiguration } from '../containers/widget-configuration';
 import { Widget } from '../containers/widget';
 import { WidgetInfo } from '../interfaces/widget-info';
 import { DashboardPanelData } from '../containers/dashboard-panel-data';
-import { DashboardDataValidatorService } from '../services/dashboard-data-validator.service';
+import { DashboardDataValidaterService } from '../services/dashboard-data-validator.service';
 import { WidgetType } from '../constants/widget-type.enum';
 import { DashboardFavoriteData } from '../interfaces/dashboard-favorite-data';
 import { DashboardChartProviderService } from './dashboard-chart-provider.service';
 import { Chart } from '../containers/chart';
+import { WidgetDataProcessorService } from './widget-data-processor.service';
 
 @Injectable()
 export class DashboardWidgetDataService {
@@ -20,8 +21,9 @@ export class DashboardWidgetDataService {
   private activePanelNumber: number = 0;
 
   constructor( private _dataService: DashboardDataContainerService, private log: Logger,
-               private _dataValidatorService: DashboardDataValidatorService,
-               private _chartProvider: DashboardChartProviderService) {
+               private _dataValidatorService: DashboardDataValidaterService,
+               private _chartProvider: DashboardChartProviderService,
+               private _widgetDataProcessor: WidgetDataProcessorService) {
 
     /* Creating Instance for Layout configuration. */
     this.layoutConfiguration = new WidgetConfiguration();
@@ -73,6 +75,7 @@ export class DashboardWidgetDataService {
         this.widgets[i].widgetName = widget.name;
         this.widgets[i].widgetDescription = widget.description;
         this.widgets[i].payload = 'object:' + i;
+        this.widgets[i].dataWidget = widget.dataWidget;
       }
     } catch (e) {
       this.log.error('Error while creating/updating dashboard widgets.', e);
@@ -133,7 +136,7 @@ export class DashboardWidgetDataService {
        if (widget.widgetType === WidgetType.GRAPH_TYPE_WIDGET) {
          this.processGraphTypeWidget(dashboardFavoriteData, widget, i, this.arrPanelData[i]);
        } else if (widget.widgetType === WidgetType.DATA_TYPE_WIDGET) {
-         this.processGraphTypeWidget(dashboardFavoriteData, widget, i, this.arrPanelData[i]);
+         this.processDataTypeWidget(dashboardFavoriteData, widget, i, this.arrPanelData[i]);
        } else if (widget.widgetType === WidgetType.TABULER_TYPE_WIDGET) {
          this.processTabulerTypeWidget(dashboardFavoriteData, widget, i, this.arrPanelData[i]);
        }
@@ -149,7 +152,8 @@ export class DashboardWidgetDataService {
   /**
    * Method is used for processing data of graph type widget.
    */
-  processGraphTypeWidget(dashboardFavoriteData: DashboardFavoriteData, widget: Widget, panelNumber, panelData: DashboardPanelData ) {
+  processGraphTypeWidget(dashboardFavoriteData: DashboardFavoriteData, widget: Widget, panelNumber: number,
+                        panelData: DashboardPanelData ) {
     try {
 
       /* Getting Chart Type by panel number. */
@@ -169,8 +173,15 @@ export class DashboardWidgetDataService {
   /**
    * Method is used for processing data of data type widget.
    */
-  processDataTypeWidget(dashboardFavoriteData: DashboardFavoriteData, widget: Widget, panelNumber, panelData: DashboardPanelData ) {
+  processDataTypeWidget(dashboardFavoriteData: DashboardFavoriteData, widget: Widget, panelNumber: number, panelData: DashboardPanelData ) {
     try {
+      /* Setting panel properties. */
+      panelData.panelTitle = dashboardFavoriteData.panelData[panelNumber].panelCaption;
+      panelData.panelNumber = panelNumber;
+      /* Checking for widget type. */
+      /* Header is not needed for Data Widget. */
+      panelData.isHeaderReq = false;
+      this._widgetDataProcessor.getDataForDataWidget(dashboardFavoriteData, widget, panelNumber, panelData);
 
     } catch (e) {
       this.log.error('Error while processing data of data type widget.', e);
