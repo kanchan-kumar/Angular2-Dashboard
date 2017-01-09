@@ -71,10 +71,11 @@ export class DashboardOnePanelViewComponent implements OnInit {
   /**
    * Handling event of widget minimize.
    */
-  onWidgetMinimize() {
+  onWidgetMinimize($event) {
     try {
 
       this.log.debug('Going to minimize the widget with widget id = ' + this.widgetInputValues.widget.widgetId);
+      $event.stopPropagation();
 
       /* Now setting widget action property here. */
       this.widgetInputValues.widgetAction = WIDGET_MINIMIZE;

@@ -8,6 +8,10 @@ import { TieredMenuModule, MenuModule, MenubarModule, PanelModule, ButtonModule,
 import { Logger, Options as LoggerOptions, Level as LoggerLevel } from 'angular2-logger/core';
 import { NgGridModule } from 'angular2-grid';
 import { ChartModule } from 'angular2-highcharts';
+import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
+import { DialogModule } from 'primeng/primeng';
+import { ProgressBarModule } from 'primeng/primeng';
+import { MomentModule } from 'angular2-moment';
 
 /* Import routes configuration. */
 import {DASHBOARD_ROUTES} from './routes/dashboard.routes';
@@ -21,6 +25,7 @@ import { DashboardWidgetDataService } from './services/dashboard-widget-data.ser
 import { DashboardDataValidaterService } from './services/dashboard-data-validator.service';
 import { DashboardChartProviderService } from './services/dashboard-chart-provider.service';
 import { WidgetDataProcessorService } from './services/widget-data-processor.service';
+import { ProgressBarService } from './services/progress-bar.service';
 
 /* Import Pipes. */
 import { RoundPipe } from 'angular-pipes/src/math/round.pipe';
@@ -37,9 +42,13 @@ import { DashboardRightPanelContainerComponent } from
 import { DashboardNavMenuComponent } from './components/dashboard-nav-menu/dashboard-nav-menu.component';
 import { DashboardWidgetComponent } from './components/dashboard-widget/dashboard-widget.component';
 import { DashboardOnePanelViewComponent } from './components/dashboard-one-panel-view/dashboard-one-panel-view.component';
+import { DashboardProgressBarComponent } from './components/dashboard-progress-bar/dashboard-progress-bar.component';
 
 @NgModule({
   declarations: [
+
+    /* Pipes. */
+    RoundPipe,
 
     /*Component. */
     DashboardComponent,
@@ -52,9 +61,7 @@ import { DashboardOnePanelViewComponent } from './components/dashboard-one-panel
     DashboardNavMenuComponent,
     DashboardWidgetComponent,
     DashboardOnePanelViewComponent,
-
-    /* Pipes. */
-    RoundPipe,
+    DashboardProgressBarComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,6 +69,7 @@ import { DashboardOnePanelViewComponent } from './components/dashboard-one-panel
     HttpModule,
     MaterialModule.forRoot(),
     RouterModule.forRoot(DASHBOARD_ROUTES),
+    SlimLoadingBarModule.forRoot(),
     ChartModule,
     TieredMenuModule,
     MenuModule,
@@ -70,6 +78,9 @@ import { DashboardOnePanelViewComponent } from './components/dashboard-one-panel
     PanelModule,
     ButtonModule,
     SplitButtonModule,
+    DialogModule,
+    ProgressBarModule,
+    MomentModule,
   ],
   providers: [
     { provide: LoggerOptions, useValue: { level: LoggerLevel.DEBUG } },
@@ -82,6 +93,7 @@ import { DashboardOnePanelViewComponent } from './components/dashboard-one-panel
     DashboardDataValidaterService,
     DashboardChartProviderService,
     WidgetDataProcessorService,
+    ProgressBarService,
   ],
   exports: [
     DashboardComponent

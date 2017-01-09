@@ -1,17 +1,17 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { Subscription }   from 'rxjs/Subscription';
 import { DashboardMenuNavigatorService } from '../../services/dashboard-menu-navigator.service';
-import {MdSidenav} from '@angular/material';
-import {Logger} from 'angular2-logger/core';
+import { MdSidenav } from '@angular/material';
+import { Logger } from 'angular2-logger/core';
 
 @Component({
   selector: 'dashboard-main',
   templateUrl: './dashboard-main.component.html',
   styleUrls: ['./dashboard-main.component.scss']
 })
-export class DashboardMainComponent implements OnInit {
+export class DashboardMainComponent implements OnInit, OnDestroy {
 
-  subscription: Subscription;
+  private subscription: Subscription;
   @ViewChild('navSideBar') menuSideNav: MdSidenav;
 
   constructor(private _menuNavService: DashboardMenuNavigatorService, private log: Logger) {
@@ -33,4 +33,7 @@ export class DashboardMainComponent implements OnInit {
   ngOnInit() {
   }
 
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 }

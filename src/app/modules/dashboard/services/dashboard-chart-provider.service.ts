@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Logger } from 'angular2-logger/core';
+import * as moment from 'moment';
 import { ChartType } from '../constants/chart-type.enum';
 import { DashboardFavoriteData } from '../interfaces/dashboard-favorite-data';
 import { Chart } from '../containers/chart';
@@ -13,6 +14,7 @@ import { ChartTooltip } from '../containers/chart-tooltip';
 import { ChartTitle } from '../containers/chart-title';
 import { ChartPlotOptions } from '../containers/chart-plot-options';
 import { DashboardDataValidaterService } from '../services/dashboard-data-validator.service';
+import { DashboardConfigDataService } from './dashboard-config-data.service';
 
 
 /**
@@ -21,7 +23,18 @@ import { DashboardDataValidaterService } from '../services/dashboard-data-valida
 @Injectable()
 export class DashboardChartProviderService {
 
-  constructor(private log: Logger, private _dataVaildator: DashboardDataValidaterService) {
+  constructor(private log: Logger, private _dataVaildator: DashboardDataValidaterService,
+              private _config: DashboardConfigDataService) {
+  }
+
+  getSeriesTooltipFormatter() {
+    try {
+      return `'<b>' + this.series.name + '</b><br/>'
+        moment(this.x, this._config.$timeZone).format('MM/DD/YY  HH:mm:ss') + '<br/>'
+        this._dataVaildator.getNumberWithComma(this.y)`;
+    } catch (e) {
+      this.log.error('Error while creating tooltip formatter for series.', e);
+    }
   }
 
   /* Method is used for getting chart based on chart type. */
@@ -125,6 +138,11 @@ export class DashboardChartProviderService {
       let xAxis = new ChartxAxis();
       xAxis.type = 'datetime';
 
+      /* Creating the chart tooltip. */
+      let tooltip = new ChartTooltip();
+      tooltip.valueSuffix = '(Sample)';
+      tooltip.formatter = this.getSeriesTooltipFormatter;
+
       /* Creating chart object. */
       let lineChart = new Chart();
 
@@ -135,6 +153,7 @@ export class DashboardChartProviderService {
       lineChart.yAxis = yAxis;
       lineChart.xAxis = xAxis;
       lineChart.legend = legend;
+      lineChart.tooltip = tooltip;
 
       return lineChart;
 

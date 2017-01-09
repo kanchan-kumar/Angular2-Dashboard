@@ -93,10 +93,11 @@ export class DashboardWidgetComponent implements OnInit {
   /**
    * Handling event of widget maximize.
    */
-  onWidgetMaximize() {
+  onWidgetMaximize($event) {
     try {
 
       this.log.debug('Going to maximize the widget with widget id = ' + this.widget.widgetId);
+      $event.stopPropagation();
 
       /* Creating instance of widget inputs. */
       let widgetInputs = new WidgetActionInputs();
@@ -115,10 +116,11 @@ export class DashboardWidgetComponent implements OnInit {
   /**
    * Handling event of widget close action.
    */
-  onWidgetClose() {
+  onWidgetClose($event) {
     try {
 
       this.log.debug('Going to close the widget with widget id = ' + this.widget.widgetId);
+      $event.stopPropagation();
 
       /* Creating instance of widget inputs. */
       let widgetInputs = new WidgetActionInputs();

@@ -2,14 +2,14 @@
     <div *ngIf="panelData.isHeaderReq" class="dashboard-panel-header-color dashboard-panel-header">
         <div class="ui-helper-clearfix label-font">
             <span class="ui-panel-title">{{panelData.panelTitle}}</span>
-            <md-icon class="dashboard-panel-close-icon panel-action-button" fontSet='fa' title='Close Widget' fontIcon='fa-times' (click)="onWidgetClose()"></md-icon>
-            <md-icon class="dashboard-panel-setting-icon panel-action-button" fontSet='fa' title='Open Widget Settings' fontIcon='fa-cog' (click)="closeWidget()"></md-icon>
-            <md-icon class="dashboard-panel-expand-icon panel-action-button" fontSet='fa' title='Maximize Widget' fontIcon='fa-expand' (click)="onWidgetMaximize()"></md-icon>
+            <md-icon class="dashboard-panel-close-icon panel-action-button" fontSet='fa' title='Close Widget' fontIcon='fa-times' (click)="onWidgetClose($event)"></md-icon>
+            <md-icon class="dashboard-panel-setting-icon panel-action-button" fontSet='fa' title='Open Widget Settings' fontIcon='fa-cog' (click)="closeWidget($event)"></md-icon>
+            <md-icon class="dashboard-panel-expand-icon panel-action-button" fontSet='fa' title='Maximize Widget' fontIcon='fa-expand' (click)="onWidgetMaximize($event)"></md-icon>
         </div>
     </div>
     <div class="dashboard-panel-data">
         <!-- Template for graph type widget. -->
-        <div *ngIf="widget.widgetType == 1" class="dashboard-graph-widget">
+        <div *ngIf="widget.widgetType == 1" class="dashboard-graph-widget" (dblclick)="onWidgetMaximize($event)">
             <chart #HChart [options]="panelData.chart" (load)="load($event.context)"></chart>
         </div>
         <!-- Template for data type widget. -->

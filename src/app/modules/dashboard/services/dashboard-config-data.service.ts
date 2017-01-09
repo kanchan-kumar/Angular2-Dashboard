@@ -3,6 +3,7 @@ import {Logger} from 'angular2-logger/core';
 import { DashboardRESTDataAPIService } from '../services/dashboard-rest-data-api.service';
 import { DashboardDataContainerService } from '../services/dashboard-data-container.service';
 import { DASHBOARD_REST_API_PATH, DASHBOARD_INIT_DATA, DASHBOARD_ONLOAD_DATA } from '../constants/rest-api-names.constants';
+import { ProgressBarService } from './progress-bar.service';
 
 @Injectable()
 export class DashboardConfigDataService {
@@ -18,13 +19,17 @@ export class DashboardConfigDataService {
   /* Configuration from server through REST API. */
   private timeZone: string = 'IST';
 
-  constructor(private log: Logger, private _restAPI: DashboardRESTDataAPIService, private _dataService: DashboardDataContainerService) { }
+  constructor(private log: Logger, private _restAPI: DashboardRESTDataAPIService,
+              private _dataService: DashboardDataContainerService,
+              private _progessBar: ProgressBarService) { }
 
   /**
    * Method is used for setting initial configuration and generating connection key of client.
    */
   public setConfiguration() {
     try {
+      /* Starting Progress Bar. */
+      this._progessBar.startProgressBar('Getting Dashboard Configurations. Please wait ...');
 
        let timestamp = new Date().getTime();
        this.clientConnectionKey = this.userName + '.' + this.testRun + '.' + timestamp;
@@ -52,7 +57,7 @@ export class DashboardConfigDataService {
         let configSubscription = this._restAPI.getDataByRESTAPI(url, '')
         .subscribe(
           result => { this.log.debug('Configuration Data recieved successfully from server.', result); },
-          err => { this.log.error('Error while getting data configuration from server', err); },
+          err => { this.log.error('Error while getting data configuration from server', err);  },
           () => { this.log.debug('Dashboard Configuration Request completed successfully. Adding data in data container service.');
 
             /*unsubscribe/releasing resources.*/
@@ -92,6 +97,7 @@ export class DashboardConfigDataService {
 
             /*unsubscribe/releasing resources.*/
             dataSubscription.unsubscribe();
+            /* Stopping Progress Bar here. */
         });
     } catch (e) {
       this.log.error('Error in getting dashboard layout and graph data. Please check server error logs.', e);
@@ -177,4 +183,13 @@ export class DashboardConfigDataService {
   public set $productName(value: string ) {
     this.productName = value;
   }
+
+  public get $timeZone(): string  {
+    return this.timeZone;
+  }
+
+  public set $timeZone(value: string ) {
+    this.timeZone = value;
+  }
+
 }

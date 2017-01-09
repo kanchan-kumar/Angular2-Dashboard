@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DashboardConfigDataService } from './services/dashboard-config-data.service';
 import { DashboardRESTDataAPIService } from './services/dashboard-rest-data-api.service';
 import { DashboardDataContainerService } from './services/dashboard-data-container.service';
-import {Logger} from 'angular2-logger/core';
+import { Logger } from 'angular2-logger/core';
 
 @Component({
   selector: 'dashboard-loading',
