@@ -1,5 +1,5 @@
-<div #widgetRef [(ngGridItem)]="widget" class="dashboard-panel dashboard-panel-color" (onChangeStop)="onChangeStop($event)">
-    <div *ngIf="panelData.isHeaderReq" class="dashboard-panel-header-color dashboard-panel-header">
+<div #widgetRef [(ngGridItem)]="widget" [ngClass]="widgetClasses" (onChangeStop)="onChangeStop($event)">
+    <div *ngIf="panelData.isHeaderReq" class="dashboard-panel-header-color dashboard-panel-header dashboard-drag-panel" (click)='onWidgetSelection($event)'>
         <div class="ui-helper-clearfix label-font">
             <span class="ui-panel-title">{{panelData.panelTitle}}</span>
             <md-icon class="dashboard-panel-close-icon panel-action-button" fontSet='fa' title='Close Widget' fontIcon='fa-times' (click)="onWidgetClose($event)"></md-icon>
@@ -13,8 +13,8 @@
             <chart #HChart [options]="panelData.chart" (load)="load($event.context)"></chart>
         </div>
         <!-- Template for data type widget. -->
-        <div *ngIf="widget.widgetType == 2">
-            <md-card [style.height]="panelData.dataWidget.dataWidgetHeight" class='dashboard-data-widget'>
+        <div *ngIf="widget.widgetType == 2" (click)='onWidgetSelection($event)'>
+            <md-card [style.height]="panelData.dataWidget.dataWidgetHeight" class='dashboard-data-widget dashboard-drag-panel'>
                 <md-card-title-group>
                     <md-icon class="dashboard-data-widget-icon" [style.fontSize]="panelData.dataWidget.dataWidgetImgSize" [style.color]="panelData.dataWidget.graphColor">{{panelData.dataWidget.dataAttrIconName}}</md-icon>
                     <md-card-title class="dashboard-data-widget-title">{{panelData.dataWidget.dataAttrDisplayName}}</md-card-title>

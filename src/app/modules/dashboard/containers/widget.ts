@@ -13,7 +13,7 @@ export class Widget implements NgGridItemConfig {
     row: number = 1;
     sizex: number = 1;
     sizey: number = 1;
-    dragHandle: string = '.dashboard-panel-header';
+    dragHandle: string = '.dashboard-drag-panel';
     resizeHandle: string = null;
     fixed: boolean = false;
     draggable: boolean = true;

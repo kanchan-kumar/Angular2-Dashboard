@@ -26,24 +26,24 @@ export class WidgetConfiguration implements NgGridConfig  {
     constructor() {
 
       /* Here we created the default configuration. */
-      this.margins = [5];
+      this.margins = [5, 5];
       this.draggable = true;
       this.resizable = true;
-      this.auto_resize = true;
+      this.auto_resize = false;
       this.auto_style = true;
       this.min_cols = 1;
       this.max_cols = 100;
       this.min_rows = 1;
       this.max_rows = 100;
       this.fix_to_grid = false;
-      this.visible_cols = 0;
+      this.visible_cols = 30;
       this.visible_rows = 0;
       this.cascade = 'up';
       this.prefer_new = true;
       this.zoom_on_drag = false;
-      this.maintain_ratio = true;
+      this.maintain_ratio = false;
       this.col_width = 45;
-      this.row_height = 50;
+      this.row_height = 35;
       this.min_width = 50;
       this.min_height = 50;
       this.limit_to_screen = true;

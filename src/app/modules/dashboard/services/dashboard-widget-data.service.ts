@@ -11,6 +11,9 @@ import { DashboardFavoriteData } from '../interfaces/dashboard-favorite-data';
 import { DashboardChartProviderService } from './dashboard-chart-provider.service';
 import { Chart } from '../containers/chart';
 import { WidgetDataProcessorService } from './widget-data-processor.service';
+import { Subject } from 'rxjs/Subject';
+import { WidgetActionInputs } from '../containers/widget-action-inputs';
+import { WIDGET_SELECTION } from '../constants/actions.constants';
 
 @Injectable()
 export class DashboardWidgetDataService {
@@ -19,6 +22,13 @@ export class DashboardWidgetDataService {
   private widgets: Widget[];
   private arrPanelData: DashboardPanelData[] = null;
   private activePanelNumber: number = 0;
+  private activeWidgetId: number = 0;
+
+  /*Observable string sources.*/
+  private widgetBroadCasterService = new Subject<string>();
+
+  /*Service Observable for getting widget broadcast.*/
+  widgetComProvider$ =  this.widgetBroadCasterService.asObservable();
 
   constructor( private _dataService: DashboardDataContainerService, private log: Logger,
                private _dataValidatorService: DashboardDataValidaterService,
@@ -27,6 +37,25 @@ export class DashboardWidgetDataService {
 
     /* Creating Instance for Layout configuration. */
     this.layoutConfiguration = new WidgetConfiguration();
+  }
+
+  /* Method is used for broadcasting widget actions */
+  broadcastWidgetAction(widgetActions: WidgetActionInputs) {
+    try {
+     /* Handling widget Action in service. */
+     switch (widgetActions.widgetAction) {
+       case WIDGET_SELECTION: {
+         this.activeWidgetId = widgetActions.widget.widgetId;
+         this.activePanelNumber = widgetActions.panelData.panelNumber;
+       }
+     }
+
+     /*Observable string streams.*/
+     this.widgetBroadCasterService.next(widgetActions.widgetAction);
+
+    } catch (e) {
+      this.log.error('Error while broadcasting widget message', e);
+    }
   }
 
   /**
@@ -40,7 +69,15 @@ export class DashboardWidgetDataService {
      let dashboardLayoutInfo = dashboardFavoriteData.dashboardLayoutData;
 
      /* Updating Layout Information. */
-     this.layoutConfiguration.max_cols = dashboardLayoutInfo.columns;
+     this.layoutConfiguration.visible_cols = dashboardLayoutInfo.columns;
+
+     /* Now updating column width and row height based on inputs. */
+     let colWidth = window.innerWidth / dashboardLayoutInfo.columns;
+
+     /* Setting column width of each widget. */
+     this.layoutConfiguration.col_width = colWidth - 13;
+
+     this.log.debug('updating layout configuration = ', this.layoutConfiguration);
 
      /* Creating Widgets Based on layout data. */
      this.createAndUpdateWidgets(dashboardLayoutInfo.panelLayoutDTO.widgets);
@@ -241,5 +278,21 @@ export class DashboardWidgetDataService {
 
   public set $layoutConfiguration(value: WidgetConfiguration) {
     this.layoutConfiguration = value;
+  }
+
+  public get $activePanelNumber(): number  {
+    return this.activePanelNumber;
+  }
+
+  public set $activePanelNumber(value: number ) {
+    this.activePanelNumber = value;
+  }
+
+  public get $activeWidgetId(): number  {
+    return this.activeWidgetId;
+  }
+
+  public set $activeWidgetId(value: number ) {
+    this.activeWidgetId = value;
   }
 }

@@ -1,18 +1,19 @@
-import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { Widget } from '../../containers/widget';
 import { Logger } from 'angular2-logger/core';
 import { DashboardPanelData } from '../../containers/dashboard-panel-data';
 import { DashboardWidgetDataService } from '../../services/dashboard-widget-data.service';
-import { WIDGET_MAXIMIZE, WIDGET_CLOSE } from '../../constants/actions.constants';
+import { WIDGET_MAXIMIZE, WIDGET_CLOSE, WIDGET_SELECTION } from '../../constants/actions.constants';
 import { WidgetActionInputs } from '../../containers/widget-action-inputs';
 import { WidgetType } from '../../constants/widget-type.enum';
+import { Subscription }   from 'rxjs/Subscription';
 
 @Component({
   selector: 'dashboard-widget',
   templateUrl: './dashboard-widget.component.html',
   styleUrls: ['./dashboard-widget.component.scss']
 })
-export class DashboardWidgetComponent implements OnInit {
+export class DashboardWidgetComponent implements OnInit, AfterViewInit {
 
   @Input()
   widget: Widget;
@@ -26,10 +27,21 @@ export class DashboardWidgetComponent implements OnInit {
   /* Panel Data Object Here. */
   panelData: DashboardPanelData = null;
 
+  /* Widget Classes. */
+  widgetClasses: string[] = ['dashboard-panel', 'dashboard-panel-color'];
+
   /* Emitting values to the parent on widget operation. */
   @Output() widgetAction: EventEmitter<any> = new EventEmitter();
 
-  constructor(private log: Logger, private _widgetDataService: DashboardWidgetDataService) { }
+  /*Data Subscriber of service.*/
+  widgetBroadcastListener: Subscription;
+
+  constructor(private log: Logger, private _widgetDataService: DashboardWidgetDataService) {
+      this.widgetBroadcastListener = this._widgetDataService.widgetComProvider$.subscribe(
+        action => {
+          this.handleWidgetSelection(action);
+      });
+  }
 
   ngOnInit() {
     try {
@@ -40,6 +52,10 @@ export class DashboardWidgetComponent implements OnInit {
       /* Now getting panel data. */
       this.panelData = this._widgetDataService.getPanelDataByPanelNumber(this.widget.widgetId);
       this.log.debug('Panel Data = ', this.panelData);
+
+      if (this.widget.widgetType === WidgetType.DATA_TYPE_WIDGET) {
+        this.panelData.dataWidget.dataWidgetHeight = (this._widgetDataService.$layoutConfiguration.row_height * this.widget.sizey) + 'px';
+      }
     } catch (e) {
       this.log.error('Error while generating widget componnent', e);
     }
@@ -82,8 +98,6 @@ export class DashboardWidgetComponent implements OnInit {
 
         /* Adjusting height with excluding panel header height. */
         this.panelData.dataWidget.dataWidgetHeight = (currentWidgetHeight - 20) + 'px';
-
-        /* Now Resizing chart based on widget width and height. */
 
     } catch (e) {
       this.log.error('Error while resizing chart on panel', e);
@@ -136,6 +150,42 @@ export class DashboardWidgetComponent implements OnInit {
     }
   }
 
+  /* Handling widget selection event. */
+   handleWidgetSelection(action) {
+    try {
+      if (this._widgetDataService.$activeWidgetId !== this.widget.widgetId) {
+        this.widgetClasses = ['dashboard-panel', 'dashboard-panel-color'];
+      }
+    } catch (e) {
+      this.log.error('Error while handling widget selection.', e);
+    }
+  }
+
+  /* Handling widget selection event here. */
+  onWidgetSelection($event) {
+    try {
+      $event.stopPropagation();
+
+      if (this.widgetClasses.indexOf('dashboard-panel-selected') > 0) {
+         this.log.debug('Widget ' + this.widget.widgetId + ' already selected.');
+      } else {
+        this.widgetClasses.push('dashboard-panel-selected');
+        this.widgetClasses.push('dashboard-panel-selected-color');
+
+        /* Creating instance of widget inputs. */
+        let widgetInputs = new WidgetActionInputs();
+        widgetInputs.panelData = this.panelData;
+        widgetInputs.widget = this.widget;
+        widgetInputs.widgetAction = WIDGET_SELECTION;
+
+      /* Emitting the action here to other widget component. */
+      this._widgetDataService.broadcastWidgetAction(widgetInputs);
+      }
+    } catch (e) {
+      this.log.error('Error while selecting widget.', e);
+    }
+  }
+
   /* Getting Chart Native Reference. */
   load(nativeChartRef) {
     try {
@@ -163,6 +213,14 @@ export class DashboardWidgetComponent implements OnInit {
 
     } catch (e) {
       this.log.error('Error while processing resize/drag event of widget', e);
+    }
+  }
+
+  /* View checked life cycle event. */
+  ngAfterViewInit() {
+    try {
+    } catch (e) {
+      this.log.error('Error while checking view content in view checked lifecycle event', e);
     }
   }
 

@@ -4,7 +4,7 @@ export class ChartTooltip {
   borderColor: string = null;
   borderRadius: number = 3;
   borderWidth: number = 1;
-  crosshairs: boolean = true;
+  crosshairs: boolean = false;
   dateTimeLabelFormats: Object = null;
   enabled: boolean = true;
   followPointer: boolean = false;
@@ -28,4 +28,5 @@ export class ChartTooltip {
   valuePrefix: string = null;
   valueSuffix: string = null;
   xDateFormat: string = null;
+  delayForDisplay: number = 1000;
 }

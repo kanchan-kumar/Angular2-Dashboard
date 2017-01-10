@@ -17,7 +17,7 @@ export class DashboardConfigDataService {
   private productName: string = 'netstorm';
 
   /* Configuration from server through REST API. */
-  private timeZone: string = 'IST';
+  private timeZone: string = 'Asia/Kolkata';
 
   constructor(private log: Logger, private _restAPI: DashboardRESTDataAPIService,
               private _dataService: DashboardDataContainerService,
@@ -45,6 +45,7 @@ export class DashboardConfigDataService {
 
     } catch (e) {
       this.log.error(e);
+      this._progessBar.stopProgressBar();
     }
   }
 
@@ -57,7 +58,7 @@ export class DashboardConfigDataService {
         let configSubscription = this._restAPI.getDataByRESTAPI(url, '')
         .subscribe(
           result => { this.log.debug('Configuration Data recieved successfully from server.', result); },
-          err => { this.log.error('Error while getting data configuration from server', err);  },
+          err => { this.log.error('Error while getting data configuration from server', err); this._progessBar.stopProgressBar(); },
           () => { this.log.debug('Dashboard Configuration Request completed successfully. Adding data in data container service.');
 
             /*unsubscribe/releasing resources.*/
@@ -70,6 +71,7 @@ export class DashboardConfigDataService {
         );
     } catch (e) {
       this.log.error('Error on getting dashboard configuration data.', e);
+      this._progessBar.stopProgressBar();
     }
   }
 
@@ -92,15 +94,17 @@ export class DashboardConfigDataService {
             this.log.debug('Data recieved successfully for layout/graph from server.', result);
             this._dataService.updateFavoriteData(result);
           },
-          err => { this.log.error('Error while getting graph/layout data from server', err); },
+          err => { this.log.error('Error while getting graph/layout data from server', err); this._progessBar.stopProgressBar(); },
           () => { this.log.debug('Dashboard Data Request completed successfully. Adding data in data container service.');
 
             /*unsubscribe/releasing resources.*/
             dataSubscription.unsubscribe();
             /* Stopping Progress Bar here. */
+            this._progessBar.stopProgressBar();
         });
     } catch (e) {
       this.log.error('Error in getting dashboard layout and graph data. Please check server error logs.', e);
+      this._progessBar.stopProgressBar();
     }
   }
 
@@ -128,6 +132,7 @@ export class DashboardConfigDataService {
       return null;
     }
   }
+
   public get $host(): string  {
     return this.host;
   }

@@ -1,5 +1,5 @@
 <!-- Layout  -->
-<div [style.display]="isSinglePanelView?'none':'inherit'" [ngGrid]="layoutSettings" [ngClass]="['scroll', 'scroll_content']" (onResizeStop)="onResizeStop($event)">
+<div [style.display]="isSinglePanelView?'none':'inherit'" [style.height]="panelHeight" [ngGrid]="layoutSettings" [ngClass]="['scroll', 'scroll_content']" (onResizeStop)="onResizeStop($event)">
 
     <!-- Now Creating Widgets -->
     <div *ngFor="let widget of widgets">

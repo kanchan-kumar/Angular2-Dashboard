@@ -4,7 +4,14 @@
 }
 
 .dashboard-panel {
-    border: ridge;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.dashboard-panel-selected {
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    box-shadow: 0px 0px 30px;
 }
 
 .dashboard-panel-header {
@@ -14,7 +21,6 @@
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
     padding: 3px;
-    border: 1px solid;
 }
 
 md-icon {
@@ -24,6 +30,8 @@ md-icon {
 }
 
 .dashboard-panel-close-icon {}
+
+.dashboard-drag-panel {}
 
 .dashboard-panel-setting-icon {
     padding-right: 5px;
