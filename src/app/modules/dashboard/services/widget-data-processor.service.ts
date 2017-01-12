@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Logger } from 'angular2-logger/core';
 import { Widget } from '../containers/widget';
 import { DashboardPanelData } from '../containers/dashboard-panel-data';
+import { DashboardDataUtilsService } from '../services/dashboard-data-utils.service';
 import { DashboardDataValidaterService } from '../services/dashboard-data-validator.service';
 import { DashboardFavoriteData } from '../interfaces/dashboard-favorite-data';
 import { DataWidget } from '../containers/data-widget';
@@ -12,7 +13,9 @@ import { DataWidgetIconNames } from '../constants/data-widget-icon-names';
 @Injectable()
 export class WidgetDataProcessorService {
 
-  constructor( private log: Logger, private _dataValidator: DashboardDataValidaterService) { }
+  constructor( private log: Logger,
+               private _dataUtils: DashboardDataUtilsService,
+               private _dataValidator: DashboardDataValidaterService) { }
 
   /** Processing data for data widget. */
   getDataForDataWidget(dashboardFavoriteData: DashboardFavoriteData, widget: Widget, panelNumber,
@@ -40,22 +43,22 @@ export class WidgetDataProcessorService {
 
     switch (widget.dataWidget.dataAttrName) {
       case AVERAGE:
-        panelData.dataWidget.dataAttrValue = this._dataValidator.getNumberWithPrecisionAndComma(firstGraphData.avg);
+        panelData.dataWidget.dataAttrValue = this._dataUtils.getNumberWithPrecisionAndComma(firstGraphData.avg);
         break;
       case MINIMUM:
-        panelData.dataWidget.dataAttrValue = this._dataValidator.getNumberWithPrecisionAndComma(firstGraphData.min);
+        panelData.dataWidget.dataAttrValue = this._dataUtils.getNumberWithPrecisionAndComma(firstGraphData.min);
         break;
       case MAXIMUM:
-        panelData.dataWidget.dataAttrValue = this._dataValidator.getNumberWithPrecisionAndComma(firstGraphData.max);
+        panelData.dataWidget.dataAttrValue = this._dataUtils.getNumberWithPrecisionAndComma(firstGraphData.max);
         break;
       case STDDEV:
-        panelData.dataWidget.dataAttrValue = this._dataValidator.getNumberWithPrecisionAndComma(firstGraphData.stdDev);
+        panelData.dataWidget.dataAttrValue = this._dataUtils.getNumberWithPrecisionAndComma(firstGraphData.stdDev);
         break;
       case COUNT:
-        panelData.dataWidget.dataAttrValue = this._dataValidator.getNumberWithPrecisionAndComma(firstGraphData.sampleCount);
+        panelData.dataWidget.dataAttrValue = this._dataUtils.getNumberWithPrecisionAndComma(firstGraphData.sampleCount);
         break;
       case LASTSAMPLE:
-        panelData.dataWidget.dataAttrValue = this._dataValidator.getNumberWithPrecisionAndComma(firstGraphData.lastSample);
+        panelData.dataWidget.dataAttrValue = this._dataUtils.getNumberWithPrecisionAndComma(firstGraphData.lastSample);
         break;
       default:
         panelData.dataWidget.dataAttrValue = '-';

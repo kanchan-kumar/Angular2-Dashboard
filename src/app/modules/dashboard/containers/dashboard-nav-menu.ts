@@ -6,8 +6,7 @@ export class DashboardNavMenu {
   }
 
   getNavMenuByProductType(product: string, onMenuClick) {
-    try
-    {
+    try {
       /* Main Menu Array. */
       let navMenuArray = new Array<DashboardMenuDef>();
 
@@ -180,7 +179,6 @@ export class DashboardNavMenu {
       navMenuArray.push(helpMenu);
 
       return navMenuArray;
-    }
-    catch(e) { console.error(e); }
+    } catch (e) { console.error(e); }
   }
 }

@@ -31,11 +31,19 @@ md-sidenav div {
     border-color: black;
 }
 
+.ui-panelmenu-content {
+    background: rgba(217, 226, 226, 0.99);
+}
+
 
 /*For Single Prime UI panel.*/
 
 .ui-panel .ui-panel-content {
     background: rgb(223, 234, 232);
+}
+
+md-sidenav {
+    background: transparent;
 }
 
 .md-sidenav-container {

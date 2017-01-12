@@ -1,5 +1,5 @@
-<p-tieredMenu class='dashboard-sub-menu' *ngIf="items" #menu [model]="items" [popup]="true"></p-tieredMenu>
-
+<p-tieredMenu class='dashboard-sub-menu' *ngIf="navMenu.items" #menu [model]="navMenu.items" [popup]="true"></p-tieredMenu>
+<!-- <p-slideMenu class='dashboard-sub-menu' *ngIf="navMenu.items" #menu [model]="navMenu.items" [popup]="true" [viewportHeight]="200"></p-slideMenu> -->
 <div (click)="openNavMenuBar($event)">
     <md-icon fontSet='fa' [fontIcon]='navMenu.icon' class='dashboard-menu-item-icon'></md-icon>
     <div class='dashboard-menu-item-text'> {{navMenu.label}} </div>

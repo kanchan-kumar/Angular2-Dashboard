@@ -12,7 +12,9 @@ export class DashboardMenuDef implements MenuItem {
     this.items = arrSubMenu;
 
     /* Event for Only Leaf Nodes.*/
-    this.command = (event) => onMenuClick(event);
+    if (onMenuClick !== null) {
+      this.command = (event) => onMenuClick(event);
+    }
   }
 
  commandEvt(onMenuClick) {

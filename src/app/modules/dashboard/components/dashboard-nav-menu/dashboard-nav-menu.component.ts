@@ -13,7 +13,6 @@ export class DashboardNavMenuComponent implements OnInit {
   @Input() sidebarCollapsed: boolean = true;
   @Input() idx = 0;
   @ViewChild('menu') menu;
-  private items: DashboardMenuDef[];
 
   constructor(private log: Logger) {
     log.debug('Menu Created for Menu Name = ' + this.navMenu);
@@ -31,7 +30,6 @@ export class DashboardNavMenuComponent implements OnInit {
 
   ngOnInit() {
     try {
-      this.items = this.navMenu.getSubMenuArr;
       this.log.debug('Sub Menu for Menu Name = ', this.navMenu);
     } catch(e) {
       this.log.error(e);

@@ -15,4 +15,5 @@
     <div class='dashboard-menu-nav-text'> My Text </div>
 </div> -->
 
-<dashboard-nav-menu *ngFor="let menu of arrNavMenu; let i = index;" [idx]="i" [navMenu]="menu"></dashboard-nav-menu>
+<p-panelMenu [model]="arrNavMenu" class="dashboard-nav-panel-menu" [ngClass]="['nav-menu-header-text', 'nav-menu-header-icon']"></p-panelMenu>
+<!-- <dashboard-nav-menu *ngFor="let menu of arrNavMenu; let i = index;" [idx]="i" [navMenu]="menu"></dashboard-nav-menu> -->

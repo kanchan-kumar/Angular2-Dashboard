@@ -136,11 +136,50 @@ body {
     padding-left: 5px;
 }
 
+.dashboard-nav-panel-menu {}
+
+.dashboard-nav-panel-menu .ui-panelmenu-header {
+    text-align: center;
+}
+
+.dashboard-nav-panel-menu .ui-panelmenu-content {
+    font-size: 14px;
+}
+
+.dashboard-nav-panel-menu .ui-menuitem-icon {
+    font-size: 20px;
+    /* 20 px less than sidenav.*/
+    width: 180px;
+}
+
+.dashboard-nav-panel-menu .ui-panelmenu-icon {
+    font-size: 20px;
+}
+
+.dashboard-nav-panel-menu .ui-menuitem-text {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.dashboard-nav-panel-menu .ui-panelmenu-content .ui-menuitem-text {
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.dashboard-nav-panel-menu .ui-panelmenu-content .ui-panelmenu-icon {
+    font-size: 12px;
+}
+
 
 /*  ---------------------------------------------------- Material Global CSS ------------------------------------------------- */
 
 md-sidenav .ui-tieredmenu {
     margin-left: 30px;
+    max-height: 400px;
+}
+
+md-sidenav .ui-menu .ui-menu-parent .ui-menu-child {
+    max-height: 400px;
 }
 
 md-card-title-text {

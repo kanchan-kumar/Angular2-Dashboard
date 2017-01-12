@@ -4,7 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from '@angular/material';
-import { TieredMenuModule, MenuModule, MenubarModule, PanelModule, ButtonModule, SplitButtonModule } from 'primeng/primeng';
+import { TieredMenuModule, MenuModule, MenubarModule, PanelModule, ButtonModule,
+         SplitButtonModule, SlideMenuModule, PanelMenuModule } from 'primeng/primeng';
 import { Logger, Options as LoggerOptions, Level as LoggerLevel } from 'angular2-logger/core';
 import { NgGridModule } from 'angular2-grid';
 import { ChartModule } from 'angular2-highcharts';
@@ -26,6 +27,8 @@ import { DashboardDataValidaterService } from './services/dashboard-data-validat
 import { DashboardChartProviderService } from './services/dashboard-chart-provider.service';
 import { WidgetDataProcessorService } from './services/widget-data-processor.service';
 import { ProgressBarService } from './services/progress-bar.service';
+import { DashboardDataRequestHandlerService } from './services/dashboard-data-request-handler.service';
+import { DashboardDataUtilsService } from './services/dashboard-data-utils.service';
 
 /* Import Pipes. */
 import { RoundPipe } from 'angular-pipes/src/math/round.pipe';
@@ -79,7 +82,9 @@ import { DashboardProgressBarComponent } from './components/dashboard-progress-b
     ButtonModule,
     SplitButtonModule,
     DialogModule,
+    SlideMenuModule,
     ProgressBarModule,
+    PanelMenuModule,
     MomentModule,
   ],
   providers: [
@@ -94,6 +99,8 @@ import { DashboardProgressBarComponent } from './components/dashboard-progress-b
     DashboardChartProviderService,
     WidgetDataProcessorService,
     ProgressBarService,
+    DashboardDataRequestHandlerService,
+    DashboardDataUtilsService
   ],
   exports: [
     DashboardComponent

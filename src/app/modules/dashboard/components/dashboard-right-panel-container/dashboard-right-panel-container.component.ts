@@ -5,7 +5,7 @@ import { Subscription }   from 'rxjs/Subscription';
 import { DashboardWidgetDataService } from '../../services/dashboard-widget-data.service';
 import { Widget } from '../../containers/widget';
 import { WidgetConfiguration } from '../../containers/widget-configuration';
-import { FAVORITE_UPDATE_AVAILABLE } from '../../constants/actions.constants';
+import { FAVORITE_DATA_UPDATE_AVAILABLE } from '../../constants/actions.constants';
 import { WidgetActionInputs } from '../../containers/widget-action-inputs';
 import { WIDGET_MAXIMIZE, WIDGET_MINIMIZE, WIDGET_CLOSE } from '../../constants/actions.constants';
 
@@ -61,7 +61,7 @@ export class DashboardRightPanelContainerComponent implements OnInit, OnDestroy 
       this.panelHeight = window.innerHeight - 40 + 'px';
 
       /* Checking for action type */
-      if (action === FAVORITE_UPDATE_AVAILABLE) {
+      if (action === FAVORITE_DATA_UPDATE_AVAILABLE) {
 
         /* Updating Layout widgets in favorite update. */
         this._widgetService.processLayoutWidgets();

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {Logger} from 'angular2-logger/core';
 import { DashboardRESTDataAPIService } from '../services/dashboard-rest-data-api.service';
 import { DashboardDataContainerService } from '../services/dashboard-data-container.service';
-import { DASHBOARD_REST_API_PATH, DASHBOARD_INIT_DATA, DASHBOARD_ONLOAD_DATA } from '../constants/rest-api-names.constants';
+import { DASHBOARD_REST_API_PATH } from '../constants/rest-api-names.constants';
 import { ProgressBarService } from './progress-bar.service';
 
 @Injectable()
@@ -21,7 +21,8 @@ export class DashboardConfigDataService {
 
   constructor(private log: Logger, private _restAPI: DashboardRESTDataAPIService,
               private _dataService: DashboardDataContainerService,
-              private _progessBar: ProgressBarService) { }
+              private _progessBar: ProgressBarService
+              ) { }
 
   /**
    * Method is used for setting initial configuration and generating connection key of client.
@@ -35,75 +36,8 @@ export class DashboardConfigDataService {
        this.clientConnectionKey = this.userName + '.' + this.testRun + '.' + timestamp;
 
        this.log.info('Generating client connection key = ' + this.clientConnectionKey);
-
-        /* Getting/Creating parameters. */
-        let host = this.getHostURL();
-        let restAPI = this.getURLParamByRESTAPIName(DASHBOARD_INIT_DATA);
-        let url = host + restAPI;
-        this.log.log('URL for getting dashboard configuration = ' + url);
-        this.getDashboardConfiguration(url);
-
     } catch (e) {
       this.log.error(e);
-      this._progessBar.stopProgressBar();
-    }
-  }
-
-  /**
-   * Getting Dashboard Configuration from server through REST API.
-   */
-  public getDashboardConfiguration(url: string) {
-    try {
-        /* Getting configuration data for dashboard. */
-        let configSubscription = this._restAPI.getDataByRESTAPI(url, '')
-        .subscribe(
-          result => { this.log.debug('Configuration Data recieved successfully from server.', result); },
-          err => { this.log.error('Error while getting data configuration from server', err); this._progessBar.stopProgressBar(); },
-          () => { this.log.debug('Dashboard Configuration Request completed successfully. Adding data in data container service.');
-
-            /*unsubscribe/releasing resources.*/
-            configSubscription.unsubscribe();
-
-            /* Now getting Dashboard Layout data and Graph Data. */
-            this.getDashboardDataOnLoad();
-
-          }
-        );
-    } catch (e) {
-      this.log.error('Error on getting dashboard configuration data.', e);
-      this._progessBar.stopProgressBar();
-    }
-  }
-
-  /**
-   * Method is used for getting layout and graph data from server.
-   */
-  public getDashboardDataOnLoad() {
-    try {
-
-        /* Getting/Creating parameters. */
-        let host = this.getHostURL();
-        let restAPI = this.getURLParamByRESTAPIName(DASHBOARD_ONLOAD_DATA);
-        let url = host + restAPI;
-        this.log.debug('URL for getting dashboard layout/graph data = ' + url);
-
-        /* Getting layout/graph data for dashboard on load. */
-        let dataSubscription = this._restAPI.getDataByRESTAPI(url, '')
-        .subscribe(
-          result => {
-            this.log.debug('Data recieved successfully for layout/graph from server.', result);
-            this._dataService.updateFavoriteData(result);
-          },
-          err => { this.log.error('Error while getting graph/layout data from server', err); this._progessBar.stopProgressBar(); },
-          () => { this.log.debug('Dashboard Data Request completed successfully. Adding data in data container service.');
-
-            /*unsubscribe/releasing resources.*/
-            dataSubscription.unsubscribe();
-            /* Stopping Progress Bar here. */
-            this._progessBar.stopProgressBar();
-        });
-    } catch (e) {
-      this.log.error('Error in getting dashboard layout and graph data. Please check server error logs.', e);
       this._progessBar.stopProgressBar();
     }
   }
@@ -118,6 +52,11 @@ export class DashboardConfigDataService {
       this.log.error(e);
       return null;
     }
+  }
+
+  /** Method is used for getting URL by REST API name. */
+  public getURLWithBasicParamByRESTAPI(apiName: string): string {
+    return this.getHostURL() + this.getURLParamByRESTAPIName(apiName);
   }
 
   /**
@@ -196,5 +135,4 @@ export class DashboardConfigDataService {
   public set $timeZone(value: string ) {
     this.timeZone = value;
   }
-
 }
