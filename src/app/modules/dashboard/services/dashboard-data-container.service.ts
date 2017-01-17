@@ -2,8 +2,10 @@ import { Injectable } from '@angular/core';
 import { Logger } from 'angular2-logger/core';
 import { DashboardFavoriteData } from '../interfaces/dashboard-favorite-data';
 import { Subject } from 'rxjs/Subject';
-import { FAVORITE_DATA_UPDATE_AVAILABLE, FAVORITE_TREE_UPDATE_AVAILABLE } from '../constants/actions.constants';
+import { FAVORITE_DATA_UPDATE_AVAILABLE, FAVORITE_TREE_UPDATE_AVAILABLE, STANDARD_TREE_DATA_AVAILABLE }
+from '../constants/actions.constants';
 import { FavoriteTreeNodeInfo } from '../interfaces/favorite-tree-node-info';
+import { TreeNodeInfo } from '../interfaces/tree-node-info';
 
 /**
  * This is the main data container service, contains all major information/data releated to favorites, layouts, etc.
@@ -22,6 +24,15 @@ export class DashboardDataContainerService {
 
   /* Service Observable for favorite updation broadcast. */
   favoriteDataObservable$ =  this.favoriteDataUpdateBroadcaster.asObservable();
+
+  /*Observable sources for GDF tree data updation.*/
+  private treeDataUpdateBroadcaster = new Subject<string>();
+
+  /* Service Observable for GDF tree data updation broadcast. */
+  treeDataObservable$ =  this.treeDataUpdateBroadcaster.asObservable();
+
+  /* Standard tree data of GDF. */
+  private standardTreeData: TreeNodeInfo[] = null;
 
   constructor(private log: Logger) { }
 
@@ -55,6 +66,18 @@ export class DashboardDataContainerService {
     }
   }
 
+  /* Updating standard tree data in service. */
+  public updateStandardTreeData(treeNodeInfo: TreeNodeInfo[]) {
+    try {
+      this.standardTreeData = treeNodeInfo;
+
+      /* Notify to all subscribers for new data available. */
+      this.treeDataUpdateBroadcaster.next(STANDARD_TREE_DATA_AVAILABLE);
+    } catch (e) {
+      this.log.error('Error while processing and updating favorite tree data in service.', e);
+    }
+  }
+
    /*Getting Layout Information from favorite.*/
    getDashboardLayoutInfo() {
     return this.dashboardFavoriteData.dashboardLayoutData;
@@ -63,6 +86,11 @@ export class DashboardDataContainerService {
   /*Getting Dashboard Favorite data. */
   public getDashboardFavoriteData() {
     return this.dashboardFavoriteData;
+  }
+
+  /**Getting Standard Tree Data. */
+  public getStandardTreeData() {
+    return this.standardTreeData;
   }
 
    /*Getting Dashboard Favorite tree data. */

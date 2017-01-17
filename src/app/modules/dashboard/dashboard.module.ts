@@ -5,14 +5,15 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from '@angular/material';
 import { TieredMenuModule, MenuModule, MenubarModule, PanelModule, ButtonModule,
-         SplitButtonModule, SlideMenuModule, PanelMenuModule } from 'primeng/primeng';
+         SplitButtonModule, SlideMenuModule, PanelMenuModule, TreeModule, InputTextModule, DropdownModule } from 'primeng/primeng';
 import { Logger, Options as LoggerOptions, Level as LoggerLevel } from 'angular2-logger/core';
-import { NgGridModule } from 'angular2-grid';
+import { NgGridModule } from 'angular2-grid/src/modules/NgGrid.module';
 import { ChartModule } from 'angular2-highcharts';
 import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 import { DialogModule } from 'primeng/primeng';
 import { ProgressBarModule } from 'primeng/primeng';
 import { MomentModule } from 'angular2-moment';
+import { PerfectScrollbarModule } from 'angular2-perfect-scrollbar';
 
 /* Import routes configuration. */
 import {DASHBOARD_ROUTES} from './routes/dashboard.routes';
@@ -46,6 +47,8 @@ import { DashboardNavMenuComponent } from './components/dashboard-nav-menu/dashb
 import { DashboardWidgetComponent } from './components/dashboard-widget/dashboard-widget.component';
 import { DashboardOnePanelViewComponent } from './components/dashboard-one-panel-view/dashboard-one-panel-view.component';
 import { DashboardProgressBarComponent } from './components/dashboard-progress-bar/dashboard-progress-bar.component';
+import { DashboardStandardTreeComponent } from './components/dashboard-standard-tree/dashboard-standard-tree.component';
+import { DashboardCustomTreeComponent } from './components/dashboard-custom-tree/dashboard-custom-tree.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +68,8 @@ import { DashboardProgressBarComponent } from './components/dashboard-progress-b
     DashboardWidgetComponent,
     DashboardOnePanelViewComponent,
     DashboardProgressBarComponent,
+    DashboardStandardTreeComponent,
+    DashboardCustomTreeComponent,
   ],
   imports: [
     BrowserModule,
@@ -73,6 +78,7 @@ import { DashboardProgressBarComponent } from './components/dashboard-progress-b
     MaterialModule.forRoot(),
     RouterModule.forRoot(DASHBOARD_ROUTES),
     SlimLoadingBarModule.forRoot(),
+    PerfectScrollbarModule.forRoot(),
     ChartModule,
     TieredMenuModule,
     MenuModule,
@@ -85,6 +91,9 @@ import { DashboardProgressBarComponent } from './components/dashboard-progress-b
     SlideMenuModule,
     ProgressBarModule,
     PanelMenuModule,
+    TreeModule,
+    InputTextModule,
+    DropdownModule,
     MomentModule,
   ],
   providers: [

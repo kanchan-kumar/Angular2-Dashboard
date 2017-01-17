@@ -15,6 +15,7 @@ export class DashboardConfigDataService {
   private userGroup: string = 'netstorm';
   private testRun: string = '60080';
   private productName: string = 'netstorm';
+  private navWidth: number = 0;
 
   /* Configuration from server through REST API. */
   private timeZone: string = 'Asia/Kolkata';
@@ -134,5 +135,13 @@ export class DashboardConfigDataService {
 
   public set $timeZone(value: string ) {
     this.timeZone = value;
+  }
+
+  public get $navWidth(): number  {
+    return this.navWidth;
+  }
+
+  public set $navWidth(value: number ) {
+    this.navWidth = value;
   }
 }

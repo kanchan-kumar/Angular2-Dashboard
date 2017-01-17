@@ -75,7 +75,7 @@ export class DashboardWidgetDataService {
      let colWidth = window.innerWidth / dashboardLayoutInfo.columns;
 
      /* Setting column width of each widget. */
-     this.layoutConfiguration.col_width = colWidth - 13;
+     this.layoutConfiguration.col_width = colWidth - 10;
 
      this.log.debug('updating layout configuration = ', this.layoutConfiguration);
 

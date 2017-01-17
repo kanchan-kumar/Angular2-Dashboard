@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Logger } from 'angular2-logger/core';
 import { DashboardMenuDef } from '../containers/dashboard-menu-def';
 import { FavoriteTreeNodeInfo } from '../interfaces/favorite-tree-node-info';
+import { TreeNodeInfo } from '../interfaces/tree-node-info';
+import { TreeNodeDataInfo } from '../containers/tree-node';
 
 @Injectable()
 export class DashboardDataUtilsService {
@@ -61,7 +63,7 @@ export class DashboardDataUtilsService {
        for (let i = 0; i < favNodeInfo.length; i++) {
 
          /* Getting Name. */
-         let name = this.truncateString(favNodeInfo[i].node, 15);
+         let name = favNodeInfo[i].node;
          let items = null;
 
          /* Creating Menu here. */
@@ -79,6 +81,75 @@ export class DashboardDataUtilsService {
       return arrFavMenu;
     } catch (e) {
       this.log.error('Error while processing favorite menu.', e);
+      return null;
+    }
+  }
+
+  /** Method is used for processing tree data and convert it to required tree data format. */
+  getRequiredTreeDataFormat(treeNodeInfo: TreeNodeInfo[], parentHierarchy: string[]) {
+    try {
+
+      /* Container format of tree data. */
+      let treeNodes = new Array();
+
+      /* Iterating tree nodes. */
+      for (let i = 0; i < treeNodeInfo.length; i++) {
+        /* Create new tree node. */
+        let treeNode = new TreeNodeDataInfo();
+        treeNode.graphID = treeNodeInfo[i].graphID;
+        treeNode.groupID = treeNodeInfo[i].groupID;
+        treeNode.lastHierarchicalComponent = treeNodeInfo[i].lastHierarchicalComponent;
+        treeNode.nodeType = treeNodeInfo[i].nodeType;
+        treeNode.type = treeNodeInfo[i].type;
+        treeNode.label = treeNodeInfo[i].text;
+
+        /*Checking for parent hierarchy. */
+        if (parentHierarchy === null) {
+          treeNode.data = new Array().concat(treeNode.label);
+        } else {
+          treeNode.data = parentHierarchy.concat(treeNode.label);
+        }
+
+        /* Icon Selection. */
+        switch (treeNode.type) {
+          case 'Metrics':
+            treeNode.icon = 'fa-hdd-o';
+            break;
+          case 'Group':
+            treeNode.icon = 'fa-newspaper-o';
+            break;
+          case 'Tier':
+            treeNode.icon = 'fa-cogs';
+            break;
+          case 'Server':
+            treeNode.icon = 'fa-server';
+            break;
+          case 'Instance':
+            treeNode.icon = 'fa-share-alt';
+            break;
+          case 'Interface':
+            treeNode.icon = 'fa-crosshairs';
+            break;
+          default:
+            treeNode.icon = 'fa-check';
+        }
+
+        /* checking for leaf node. */
+        if (treeNodeInfo[i].children) {
+          treeNode.expanded = treeNodeInfo[i].state.opened;
+          treeNode.leaf = true;
+
+          /** Adding tree node in array. */
+          treeNodes.push(treeNode);
+        } else {
+          treeNodes.push({icon: 'fa-line-chart', label: treeNode.label, type: treeNode.type});
+        }
+      }
+      console.log(treeNodes);
+
+      return treeNodes;
+    } catch (e) {
+      this.log.error('Error while processing tree nodes.', e);
       return null;
     }
   }

@@ -4,6 +4,7 @@ import { DashboardWidgetDataService } from '../../services/dashboard-widget-data
 import { WIDGET_MINIMIZE } from '../../constants/actions.constants';
 import { WidgetActionInputs } from '../../containers/widget-action-inputs';
 import { DashboardPanelData } from '../../containers/dashboard-panel-data';
+import { DashboardConfigDataService } from '../../services/dashboard-config-data.service';
 
 @Component({
   selector: 'dashboard-one-panel-view',
@@ -24,7 +25,9 @@ export class DashboardOnePanelViewComponent implements OnInit {
   /* Initial height of panel. */
   panelHeight: string = '300px';
 
-  constructor(private log: Logger, private _widgetDataService: DashboardWidgetDataService) { }
+  constructor(private log: Logger,
+              private _widgetDataService: DashboardWidgetDataService,
+              private _config: DashboardConfigDataService) { }
 
   ngOnInit() {
     try {
@@ -34,7 +37,7 @@ export class DashboardOnePanelViewComponent implements OnInit {
       this.widgetInputValues.panelData.chart = this._widgetDataService.getEmptyChart();
 
       /* Setting height of panel. */
-      this.panelHeight = (window.innerHeight - 100) + 'px';
+      this.panelHeight = (window.innerHeight - 50) + 'px';
 
       this.log.debug('Initializing single panel view with widget = ', this.widgetInputValues, ', height = ' + this.panelHeight);
     } catch (e) {
@@ -46,9 +49,10 @@ export class DashboardOnePanelViewComponent implements OnInit {
   resizeAndFitChartOnPanel() {
     try {
 
+        this.log.debug('Resizing chart on single panel view.');
         /* Adjusting height with excluding panel header height. */
-        let adjustedHeight = window.innerHeight - 120;
-        let adjustedWidth = window.innerWidth - 130;
+        let adjustedHeight = window.innerHeight - 130;
+        let adjustedWidth = window.innerWidth - this._config.$navWidth - 20;
 
         /* Now Resizing chart based on widget width and height. */
         this.nativeChartRef.setSize(adjustedWidth, adjustedHeight);

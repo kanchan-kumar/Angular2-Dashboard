@@ -1,5 +1,5 @@
 
-import { NgGridItemConfig } from 'angular2-grid';
+import { NgGridItemConfig } from 'angular2-grid/src/interfaces/INgGrid';
 import { DataWidgetPropsInfo  } from '../interfaces/data-widget-props-info';
 
 export class Widget implements NgGridItemConfig {

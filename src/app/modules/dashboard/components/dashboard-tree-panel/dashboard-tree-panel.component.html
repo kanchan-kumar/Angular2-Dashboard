@@ -1,3 +1,21 @@
-<p>
-  dashboard-tree-panel works!
-</p>
+<!-- Navigation Icon -->
+<div class="dashboard-nav-menu-header">
+    <md-icon fontSet='fa' fontIcon='fa-plus-square' title='Expand Menu Navigation Widget' class='dashboard-menu-nav-header-icon' (click)="increaseTreeNavWidth()"></md-icon>
+    <md-icon fontSet='fa' fontIcon='fa-minus-square' title='Collapse Menu Navigation Widget' class='dashboard-menu-nav-header-icon' (click)="decreaseTreeNavWidth()"></md-icon>
+    <md-icon fontSet='fa' fontIcon='fa-arrow-circle-right' title='Close Menu Navigation Widget' class='dashboard-menu-nav-header-icon' (click)="onTreeNavClose()"></md-icon>
+
+</div>
+<!-- Splitter Icon -->
+<hr class="dashboard-menu-nav-split-icon">
+
+<!-- Here tree component loaded. -->
+<div class="dashboard-tree-component">
+    <md-tab-group [selectedIndex]="0">
+        <md-tab label="Standard">
+            <dashboard-standard-tree></dashboard-standard-tree>
+        </md-tab>
+        <md-tab label="Custom">
+            <dashboard-custom-tree> </dashboard-custom-tree>
+        </md-tab>
+    </md-tab-group>
+</div>

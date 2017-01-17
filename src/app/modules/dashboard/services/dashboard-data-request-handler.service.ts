@@ -4,7 +4,8 @@ import { DashboardRESTDataAPIService } from '../services/dashboard-rest-data-api
 import { DashboardDataContainerService } from '../services/dashboard-data-container.service';
 import { DashboardConfigDataService } from '../services/dashboard-config-data.service';
 import { ProgressBarService } from './progress-bar.service';
-import { DASHBOARD_INIT_DATA, DASHBOARD_ONLOAD_DATA, DASHBOARD_FAV_TREE_DATA } from '../constants/rest-api-names.constants';
+import { DASHBOARD_INIT_DATA, DASHBOARD_ONLOAD_DATA, DASHBOARD_FAV_TREE_DATA, DASHBOARD_STANDARD_TREE_DATA }
+from '../constants/rest-api-names.constants';
 
 @Injectable()
 export class DashboardDataRequestHandlerService {
@@ -103,6 +104,42 @@ export class DashboardDataRequestHandlerService {
         );
     } catch (e) {
       this.log.error('Error while getting data of favorite tree.', e);
+    }
+  }
+
+  /* Getting URL for standard tree data update. */
+  getStandardTreeURL(path: string[]) {
+    let urlParam = '';
+    if (path != null) {
+      for (let i = 0; i < path.length; i++) {
+        urlParam += '&path[]=' + path[i];
+      }
+    }
+    return this._config.getURLWithBasicParamByRESTAPI(DASHBOARD_STANDARD_TREE_DATA) + urlParam;
+  }
+
+  /* Method is used for getting Standard tree data. */
+  getStandardTreeData() {
+    try {
+       /* Composing URL. */
+       let restAPIURL = this.getStandardTreeURL(null);
+
+       /* Getting favorite tree data for dashboard. */
+        let dataSubscription = this._restAPI.getDataByRESTAPI(restAPIURL, '')
+        .subscribe(
+          result => {
+            this.log.log('Standard tree data recieved successfully from server.', result);
+            /* Now getting Dashboard Layout data and Graph Data. */
+            this._dataService.updateStandardTreeData(result);
+          },
+          err => { this.log.error('Error while getting standard tree data from server', err); },
+          () => { this.log.debug('Dashboard standard tree data request completed successfully. Adding data in data container service.');
+            /*unsubscribe/releasing resources.*/
+            dataSubscription.unsubscribe();
+          }
+        );
+    } catch (e) {
+      this.log.error('Error while getting data of standard tree.', e);
     }
   }
 }

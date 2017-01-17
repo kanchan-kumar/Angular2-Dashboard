@@ -35,6 +35,61 @@ md-sidenav div {
     background: rgba(217, 226, 226, 0.99);
 }
 
+.dashboard-nav-panel-menu .ui-panelmenu-header {
+    background: rgba(217, 226, 226, 0.99);
+}
+
+.dashboard-nav-panel-menu div {
+    color: black;
+}
+
+
+/*First level node css.*/
+
+.dashboard-tree-graph-node {
+    color: khaki;
+}
+
+.dashboard-tree-group-node {
+    color: rgb(41, 228, 239);
+}
+
+.dashboard-tree-metrics-node {
+    color: blanchedalmond;
+}
+
+.dashboard-tree-tier-node {
+    color: cornsilk;
+}
+
+.dashboard-tree-server-node {
+    color: azure;
+}
+
+.dashboard-tree-instance-node {
+    color: gold;
+}
+
+.dashboard-tree-interface-node {
+    color: yellow;
+}
+
+.dashboard-tree-input-icon {
+    background: transparent;
+}
+
+.md-select-value {
+    color: white;
+}
+
+.md-select-trigger {
+    color: white;
+}
+
+.md-select-arrow {
+    color: white;
+}
+
 
 /*For Single Prime UI panel.*/
 

@@ -26,5 +26,4 @@ export class DashboardRESTDataAPIService {
       this.log.error(e);
     }
   }
-
 }

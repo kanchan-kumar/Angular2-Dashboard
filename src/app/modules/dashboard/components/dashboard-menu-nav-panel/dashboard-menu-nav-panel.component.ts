@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, NgZone } from '@angular/core';
 import { DashboardMenuNavigatorService } from '../../services/dashboard-menu-navigator.service';
 import { DashboardDataContainerService } from '../../services/dashboard-data-container.service';
 import { Logger } from 'angular2-logger/core';
@@ -7,6 +7,7 @@ import { DashboardNavMenu } from '../../containers/dashboard-nav-menu';
 import { Subscription }   from 'rxjs/Subscription';
 import { FAVORITE_TREE_UPDATE_AVAILABLE } from '../../constants/actions.constants';
 import { DashboardDataUtilsService } from '../../services/dashboard-data-utils.service';
+import { CLOSE_SIDENAV, INCREASE_SIDENAV, DECREASE_SIDENAV } from '../../constants/actions.constants';
 
 @Component({
   selector: 'dashboard-menu-nav-panel',
@@ -14,7 +15,7 @@ import { DashboardDataUtilsService } from '../../services/dashboard-data-utils.s
   templateUrl: './dashboard-menu-nav-panel.component.html',
   styleUrls: ['./dashboard-menu-nav-panel.component.scss']
 })
-export class DashboardMenuNavPanelComponent implements OnInit {
+export class DashboardMenuNavPanelComponent implements OnInit, OnDestroy {
 
   /*Data Subscriber of service.*/
   dataSubscription: Subscription;
@@ -25,18 +26,46 @@ export class DashboardMenuNavPanelComponent implements OnInit {
   /* Product Type. */
   productType: string = 'netstorm';
 
+  /* Height of left navigation menu. */
+  navHeight: number = 400;
+
   constructor(private log: Logger, private _menuNavService: DashboardMenuNavigatorService, private _navMenu: DashboardNavMenu,
               private _dataService: DashboardDataContainerService,
-              private _dataUtils: DashboardDataUtilsService) {
-    this.arrNavMenu = _navMenu.getNavMenuByProductType(this.productType, this.menuClickActionHandler);
+              private _dataUtils: DashboardDataUtilsService,
+              private ngZone: NgZone) {
+    this.arrNavMenu = _navMenu.getNavMenuByProductType(this.productType, this.menuClick);
+
+    /* Calculation of navigation menu height. */
+    /* Adjustment of height excluding the top fixed menu. */
+    this.navHeight = window.innerHeight - 62;
+
+    /* Putting the definition of component in global object for handling callback methods. */
+    window['dashboardNavPanelRef'] = {
+      zone: ngZone,
+      component: this
+    };
+
     log.debug('Menu Definition Array = ', this.arrNavMenu);
+  }
+
+  /* Event for menu click. */
+  menuClick($event) {
+      window['dashboardNavPanelRef'].zone.run((() => {
+      window['dashboardNavPanelRef'].component.menuClickActionHandler($event);
+    }));
+  }
+
+  /* Event for favorite menu click. */
+  favMenuClick($event) {
+      window['dashboardNavPanelRef'].zone.run((() => {
+      window['dashboardNavPanelRef'].component.favoriteMenuActionHandler($event);
+    }));
   }
 
   /*Menu Click Event Handler. */
   menuClickActionHandler(event) {
     try {
-      console.log(event);
-      console.log(event.item.label);
+      this.log.debug(event.item.label);
     } catch (e) {
       this.log.error('Error while handling favorite opertaion.', e);
     }
@@ -45,8 +74,7 @@ export class DashboardMenuNavPanelComponent implements OnInit {
   /* Handler for favorite menu click. */
   favoriteMenuActionHandler(event) {
     try {
-      console.log(event);
-      console.log(event.item.label);
+      this.log.debug(event.item.label);
     } catch (e) {
       this.log.error('Error while handling favorite opertaion.', e);
     }
@@ -62,7 +90,7 @@ export class DashboardMenuNavPanelComponent implements OnInit {
       /* Checking for action type */
       if (action === FAVORITE_TREE_UPDATE_AVAILABLE) {
         let favMenuDef = this._dataUtils.processFavoriteMenuDef(this._dataService.getDashboardFavoriteTreeData(),
-        this.favoriteMenuActionHandler);
+        this.favMenuClick);
 
         /* Checking for valid data. */
         /* Updating data in menu definition. */
@@ -94,6 +122,22 @@ export class DashboardMenuNavPanelComponent implements OnInit {
 
   /*Toggle Navigation Bar. */
   onMenuNavClose() {
-    this._menuNavService.toggleNavMenuAction('toggleMenuNav');
+    this._menuNavService.toggleNavMenuAction(CLOSE_SIDENAV);
+  }
+
+  /** For Increasing SideNav width. */
+  increaseSideNavWidth() {
+    this._menuNavService.toggleNavMenuAction(INCREASE_SIDENAV);
+  }
+
+  /** For Decreasing SideNav width. */
+  decreaseSideNavWidth() {
+    this._menuNavService.toggleNavMenuAction(DECREASE_SIDENAV);
+  }
+
+  ngOnDestroy() {
+    try {
+      window['dashboardNavPanelRef'] = null;
+    } catch (e) {}
   }
 }

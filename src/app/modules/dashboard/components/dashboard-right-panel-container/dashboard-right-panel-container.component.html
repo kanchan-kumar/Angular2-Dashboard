@@ -1,12 +1,15 @@
 <!-- Layout  -->
-<div [style.display]="isSinglePanelView?'none':'inherit'" [style.height]="panelHeight" [ngGrid]="layoutSettings" [ngClass]="['scroll', 'scroll_content']" (onResizeStop)="onResizeStop($event)">
+<!-- Scroll Component. -->
+<perfect-scrollbar>
+    <div [style.display]="isSinglePanelView?'none':'inherit'" [ngClass]="['layout-grid']" [ngGrid]="layoutSettings" (onResizeStop)="onResizeStop($event)">
 
-    <!-- Now Creating Widgets -->
-    <div *ngFor="let widget of widgets">
-        <!-- Insert widget component here. -->
-        <dashboard-widget [widget]="widget" (widgetAction)="onWidgetAction($event)"> </dashboard-widget>
+        <!-- Now Creating Widgets -->
+        <div *ngFor="let widget of widgets">
+            <!-- Insert widget component here. -->
+            <dashboard-widget [widget]="widget" (widgetAction)="onWidgetAction($event)"> </dashboard-widget>
+        </div>
     </div>
-</div>
+</perfect-scrollbar>
 
 <!-- Single Panel View Mode- -->
 <div [style.display]="isSinglePanelView?'inherit':'none'">

@@ -1,0 +1,43 @@
+<!-- Standard Tree Inputs. -->
+<div>
+    <md-select class="dashboard-tree-search-select" [(ngModel)]="selectedTreeLevel" name="level">
+        <md-option *ngFor="let level of treeLevels" [value]="level.value">
+            {{level.display}}
+        </md-option>
+    </md-select>
+    <input type="text" pInputText [(ngModel)]="searchText" placeholder="Search In Tree" class="dashboard-tree-search-text" />
+    <button md-mini-fab><md-icon fontSet='fa' fontIcon='fa-search' title='Search In Tree' class='dashboard-tree-input-icon' (click)="increaseSideNavWidth()"></md-icon></button>
+    <button md-mini-fab><md-icon fontSet='fa' fontIcon='fa-refresh' title='Clear Previous Search Result' class='dashboard-tree-input-icon' (click)="increaseSideNavWidth()"></md-icon></button>
+</div>
+
+<!-- Splitter Icon -->
+<hr class="dashboard-menu-nav-split-icon">
+
+<!-- Tree Area -->
+<perfect-scrollbar>
+    <div [ngStyle]="{'height': standardTreePanelHeight}">
+        <p-tree [value]="nodes" (onNodeExpand)="loadNodes($event)">
+            <template let-node pTemplate="Graph">
+       <span [title]="node.type" class="dashboard-tree-graph-node">{{node.label}}</span>
+    </template>
+            <template let-node pTemplate="Group">
+       <span [title]="node.type" class="dashboard-tree-group-node">{{node.label}}</span>
+    </template>
+            <template let-node pTemplate="Metrics">
+       <span [title]="node.type" class="dashboard-tree-metrics-node">{{node.label}}</span>
+    </template>
+            <template let-node pTemplate="Tier">
+       <span [title]="node.type" class="dashboard-tree-tier-node">{{node.label}}</span>
+    </template>
+            <template let-node pTemplate="Server">
+       <span [title]="node.type" class="dashboard-tree-server-node">{{node.label}}</span>
+    </template>
+            <template let-node pTemplate="Instance">
+       <span [title]="node.type" class="dashboard-tree-instance-node">{{node.label}}</span>
+    </template>
+            <template let-node pTemplate="Interface">
+       <span [title]="node.type" class="dashboard-tree-interface-node">{{node.label}}</span>
+    </template>
+        </p-tree>
+    </div>
+</perfect-scrollbar>

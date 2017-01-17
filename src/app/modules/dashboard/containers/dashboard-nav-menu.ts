@@ -181,4 +181,24 @@ export class DashboardNavMenu {
       return navMenuArray;
     } catch (e) { console.error(e); }
   }
+
+  /** Getting favorite menu options. */
+  getFavoriteMenuOptions(onFavMenuClick): DashboardMenuDef[] {
+    try {
+
+      /** Dashboard favorite action menu. */
+      let refreshMenu = new DashboardMenuDef('Refresh', 'fa-refresh', null, onFavMenuClick);
+      let reportMenu = new DashboardMenuDef('Update', 'fa-share-square', null, onFavMenuClick);
+
+      let arrFavMenu = new Array();
+      arrFavMenu[0] = refreshMenu;
+      arrFavMenu[1] = reportMenu;
+
+      return arrFavMenu;
+
+    } catch (e) {
+      console.error(e);
+      return null;
+    }
+  }
 }

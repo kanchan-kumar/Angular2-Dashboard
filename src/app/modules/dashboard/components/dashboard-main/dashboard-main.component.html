@@ -1,14 +1,20 @@
-<!-- Main Page Structure. -->
-<md-sidenav-container fullscreen class="dashboard-sidenav-layout">
+<!-- Top Panel of Dashboard -->
+<dashboard-top-panel> </dashboard-top-panel>
 
-    <!-- Side Panel Component. -->
-    <md-sidenav #navSideBar mode='side' opened=false color='primary'>
+<!-- Main Page Structure. -->
+<md-sidenav-container class="dashboard-sidenav-layout">
+
+    <!-- Left Side Menu Navigation Panel Component. -->
+    <md-sidenav #navSideBar mode='side' opened=false color='primary' [ngStyle]="{'width': navWidth+'px'}">
         <!-- Left Panel of Dashboard -->
         <dashboard-menu-nav-panel></dashboard-menu-nav-panel>
     </md-sidenav>
 
-    <!-- Top Panel of Dashboard -->
-    <dashboard-top-panel> </dashboard-top-panel>
+    <!-- Right Side GDF Tree Panel Component. -->
+    <md-sidenav align="end" #navTreeSideBar mode='side' opened=false color='primary' [ngStyle]="{'width': navTreeWidth+'px'}">
+        <!-- Left Panel of Dashboard -->
+        <dashboard-tree-panel></dashboard-tree-panel>
+    </md-sidenav>
 
     <!-- Routed views go here. When routing goes through Menu Navigation. -->
     <router-outlet></router-outlet>

@@ -1,9 +1,10 @@
-.dashboard-sidenav-layout {
-    md-sidenav {
-        width: 200px;
-        overflow: initial;
-    }
-    md-sidenav /deep/ .cdk-focus-trap-content {
-        overflow-y: initial;
-    }
+.dashboard-sidenav-layout {}
+
+md-sidenav {
+    width: 200px;
+    overflow: initial;
+}
+
+md-sidenav /deep/ .cdk-focus-trap-content {
+    overflow-y: initial;
 }

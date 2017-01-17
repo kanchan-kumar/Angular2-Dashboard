@@ -1,5 +1,5 @@
 export class ChartTooltip {
-  animation: boolean = true;
+  animation: boolean = false;
   backgroundColor: string = '#FFF';
   borderColor: string = null;
   borderRadius: number = 3;
