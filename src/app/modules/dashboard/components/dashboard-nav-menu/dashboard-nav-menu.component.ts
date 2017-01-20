@@ -1,5 +1,5 @@
 import { Component, ViewChild, Input, OnInit } from '@angular/core';
-import {Logger} from 'angular2-logger/core';
+import {Logger} from '../../../../../vendors/angular2-logger/core';
 import { DashboardMenuDef } from '../../containers/dashboard-menu-def';
 
 @Component({

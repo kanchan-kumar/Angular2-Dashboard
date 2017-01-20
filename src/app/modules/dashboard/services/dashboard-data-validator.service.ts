@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Logger } from 'angular2-logger/core';
+import { Logger } from '../../../../vendors/angular2-logger/core';
 import { ErrorCodes } from '../constants/error-codes.enum';
 
 @Injectable()

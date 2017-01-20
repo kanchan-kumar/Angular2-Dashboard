@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Logger } from 'angular2-logger/core';
+import { Logger } from '../../../../vendors/angular2-logger/core';
 import * as moment from 'moment';
 import { ChartType } from '../constants/chart-type.enum';
 import { DashboardFavoriteData } from '../interfaces/dashboard-favorite-data';

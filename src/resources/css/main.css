@@ -178,6 +178,10 @@ body {
     font-size: 12px;
 }
 
+.dashboard-tree-context-menu {
+    width: 180px;
+}
+
 .ui-tree {
     background: transparent;
     border: 0px;

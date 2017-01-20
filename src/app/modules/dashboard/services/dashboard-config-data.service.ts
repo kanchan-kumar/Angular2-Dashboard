@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Logger} from 'angular2-logger/core';
+import {Logger} from '../../../../vendors/angular2-logger/core';
 import { DashboardRESTDataAPIService } from '../services/dashboard-rest-data-api.service';
 import { DashboardDataContainerService } from '../services/dashboard-data-container.service';
 import { DASHBOARD_REST_API_PATH } from '../constants/rest-api-names.constants';

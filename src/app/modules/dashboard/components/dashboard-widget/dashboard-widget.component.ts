@@ -1,12 +1,13 @@
 import { Component, OnInit, Input, ViewChild, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { Widget } from '../../containers/widget';
-import { Logger } from 'angular2-logger/core';
+import { Logger } from '../../../../../vendors/angular2-logger/core';
 import { DashboardPanelData } from '../../containers/dashboard-panel-data';
 import { DashboardWidgetDataService } from '../../services/dashboard-widget-data.service';
 import { WIDGET_MAXIMIZE, WIDGET_CLOSE, WIDGET_SELECTION } from '../../constants/actions.constants';
 import { WidgetActionInputs } from '../../containers/widget-action-inputs';
 import { WidgetType } from '../../constants/widget-type.enum';
 import { Subscription }   from 'rxjs/Subscription';
+import { MenuItem } from '../../../../../vendors/primeng/primeng';
 
 @Component({
   selector: 'dashboard-widget',
@@ -36,11 +37,38 @@ export class DashboardWidgetComponent implements OnInit, AfterViewInit {
   /*Data Subscriber of service.*/
   widgetBroadcastListener: Subscription;
 
+  widgetMenuItems: MenuItem[];
+
   constructor(private log: Logger, private _widgetDataService: DashboardWidgetDataService) {
       this.widgetBroadcastListener = this._widgetDataService.widgetComProvider$.subscribe(
         action => {
           this.handleWidgetSelection(action);
       });
+
+      this.widgetMenuItems = [
+            {
+                label: 'File',
+                items: [{
+                        label: 'New',
+                        icon: 'fa-plus',
+                        items: [
+                            {label: 'Project'},
+                            {label: 'Other'},
+                        ]
+                    },
+                    {label: 'Open'},
+                    {label: 'Quit'}
+                ]
+            },
+            {
+                label: 'Edit',
+                icon: 'fa-edit',
+                items: [
+                    {label: 'Undo', icon: 'fa-mail-forward'},
+                    {label: 'Redo', icon: 'fa-mail-reply'}
+                ]
+            }
+        ];
   }
 
   ngOnInit() {
@@ -164,8 +192,6 @@ export class DashboardWidgetComponent implements OnInit, AfterViewInit {
   /* Handling widget selection event here. */
   onWidgetSelection($event) {
     try {
-      $event.stopPropagation();
-
       if (this.widgetClasses.indexOf('dashboard-panel-selected') > 0) {
          this.log.debug('Widget ' + this.widget.widgetId + ' already selected.');
       } else {
@@ -181,6 +207,8 @@ export class DashboardWidgetComponent implements OnInit, AfterViewInit {
       /* Emitting the action here to other widget component. */
       this._widgetDataService.broadcastWidgetAction(widgetInputs);
       }
+
+      $event.stopPropagation();
     } catch (e) {
       this.log.error('Error while selecting widget.', e);
     }

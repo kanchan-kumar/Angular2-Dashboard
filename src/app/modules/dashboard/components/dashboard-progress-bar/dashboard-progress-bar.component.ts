@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProgressBarService } from '../../services/progress-bar.service';
 import { Subscription }   from 'rxjs/Subscription';
-import { Logger } from 'angular2-logger/core';
+import { Logger } from '../../../../../vendors/angular2-logger/core';
 import { Observable } from 'rxjs/Rx';
 
 @Component({

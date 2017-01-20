@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import {Logger} from 'angular2-logger/core';
-
+import {Logger} from '../../../../vendors/angular2-logger/core';
 @Injectable()
 export class DashboardRESTDataAPIService {
 

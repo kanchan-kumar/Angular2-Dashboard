@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { Subscription }   from 'rxjs/Subscription';
 import { DashboardMenuNavigatorService } from '../../services/dashboard-menu-navigator.service';
 import { MdSidenav } from '@angular/material';
-import { Logger } from 'angular2-logger/core';
+import { Logger } from '../../../../../vendors/angular2-logger/core';
 import { OPEN_SIDENAV, CLOSE_SIDENAV, INCREASE_SIDENAV, DECREASE_SIDENAV,
          OPEN_TREE_SIDENAV, CLOSE_TREE_SIDENAV, INCREASE_TREE_SIDENAV, DECREASE_TREE_SIDENAV } from '../../constants/actions.constants';
 import { DashboardConfigDataService } from '../../services/dashboard-config-data.service';

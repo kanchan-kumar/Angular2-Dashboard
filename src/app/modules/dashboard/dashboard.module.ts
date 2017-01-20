@@ -5,13 +5,13 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from '@angular/material';
 import { TieredMenuModule, MenuModule, MenubarModule, PanelModule, ButtonModule,
-         SplitButtonModule, SlideMenuModule, PanelMenuModule, TreeModule, InputTextModule, DropdownModule } from 'primeng/primeng';
-import { Logger, Options as LoggerOptions, Level as LoggerLevel } from 'angular2-logger/core';
-import { NgGridModule } from 'angular2-grid/src/modules/NgGrid.module';
+         SplitButtonModule, SlideMenuModule, PanelMenuModule, TreeModule, InputTextModule, DropdownModule,
+         ContextMenuModule, DialogModule, ProgressBarModule } from 'primeng/primeng';
+import { Logger, Options as LoggerOptions, Level as LoggerLevel } from '../../../vendors/angular2-logger/core';
+
+import { NgGridModule } from '../../../vendors/angular2-grid/src/modules/NgGrid.module';
 import { ChartModule } from 'angular2-highcharts';
 import { SlimLoadingBarModule } from 'ng2-slim-loading-bar';
-import { DialogModule } from 'primeng/primeng';
-import { ProgressBarModule } from 'primeng/primeng';
 import { MomentModule } from 'angular2-moment';
 import { PerfectScrollbarModule } from 'angular2-perfect-scrollbar';
 
@@ -30,6 +30,7 @@ import { WidgetDataProcessorService } from './services/widget-data-processor.ser
 import { ProgressBarService } from './services/progress-bar.service';
 import { DashboardDataRequestHandlerService } from './services/dashboard-data-request-handler.service';
 import { DashboardDataUtilsService } from './services/dashboard-data-utils.service';
+import { TreeDataRequestHandlerService } from './services/tree-data-request-handler.service';
 
 /* Import Pipes. */
 import { RoundPipe } from 'angular-pipes/src/math/round.pipe';
@@ -49,6 +50,7 @@ import { DashboardOnePanelViewComponent } from './components/dashboard-one-panel
 import { DashboardProgressBarComponent } from './components/dashboard-progress-bar/dashboard-progress-bar.component';
 import { DashboardStandardTreeComponent } from './components/dashboard-standard-tree/dashboard-standard-tree.component';
 import { DashboardCustomTreeComponent } from './components/dashboard-custom-tree/dashboard-custom-tree.component';
+import { PositionComponentDirective } from './directives/position-component.directive';
 
 @NgModule({
   declarations: [
@@ -70,6 +72,7 @@ import { DashboardCustomTreeComponent } from './components/dashboard-custom-tree
     DashboardProgressBarComponent,
     DashboardStandardTreeComponent,
     DashboardCustomTreeComponent,
+    PositionComponentDirective,
   ],
   imports: [
     BrowserModule,
@@ -94,6 +97,7 @@ import { DashboardCustomTreeComponent } from './components/dashboard-custom-tree
     TreeModule,
     InputTextModule,
     DropdownModule,
+    ContextMenuModule,
     MomentModule,
   ],
   providers: [
@@ -109,7 +113,8 @@ import { DashboardCustomTreeComponent } from './components/dashboard-custom-tree
     WidgetDataProcessorService,
     ProgressBarService,
     DashboardDataRequestHandlerService,
-    DashboardDataUtilsService
+    DashboardDataUtilsService,
+    TreeDataRequestHandlerService
   ],
   exports: [
     DashboardComponent

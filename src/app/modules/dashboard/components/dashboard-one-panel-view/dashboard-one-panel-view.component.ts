@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Logger } from 'angular2-logger/core';
+import { Logger } from '../../../../../vendors/angular2-logger/core';
 import { DashboardWidgetDataService } from '../../services/dashboard-widget-data.service';
 import { WIDGET_MINIMIZE } from '../../constants/actions.constants';
 import { WidgetActionInputs } from '../../containers/widget-action-inputs';

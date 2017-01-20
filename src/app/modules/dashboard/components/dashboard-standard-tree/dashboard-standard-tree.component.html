@@ -6,8 +6,8 @@
         </md-option>
     </md-select>
     <input type="text" pInputText [(ngModel)]="searchText" placeholder="Search In Tree" class="dashboard-tree-search-text" />
-    <button md-mini-fab><md-icon fontSet='fa' fontIcon='fa-search' title='Search In Tree' class='dashboard-tree-input-icon' (click)="increaseSideNavWidth()"></md-icon></button>
-    <button md-mini-fab><md-icon fontSet='fa' fontIcon='fa-refresh' title='Clear Previous Search Result' class='dashboard-tree-input-icon' (click)="increaseSideNavWidth()"></md-icon></button>
+    <button md-mini-fab (click)="searchInTree()"><md-icon fontSet='fa' fontIcon='fa-search' title='Search In Tree' class='dashboard-tree-input-icon'></md-icon></button>
+    <button md-mini-fab><md-icon fontSet='fa' fontIcon='fa-refresh' title='Clear Previous Search Result' class='dashboard-tree-input-icon' (click)="clearSearch()"></md-icon></button>
 </div>
 
 <!-- Splitter Icon -->
@@ -16,28 +16,29 @@
 <!-- Tree Area -->
 <perfect-scrollbar>
     <div [ngStyle]="{'height': standardTreePanelHeight}">
-        <p-tree [value]="nodes" (onNodeExpand)="loadNodes($event)">
+        <p-contextMenu #cm [model]="standardTreeMenuItems" styleClass="dashboard-tree-context-menu"></p-contextMenu>
+        <p-tree [value]="nodes" (onNodeExpand)="loadNodes($event)" selectionMode="multiple" [contextMenu]="cm" (onNodeSelect)="onNodeClick($event);" (onNodeContextMenuSelect)="onNodeRightClick($event)">
             <template let-node pTemplate="Graph">
-       <span [title]="node.type" class="dashboard-tree-graph-node">{{node.label}}</span>
-    </template>
+              <span [title]="node.type" class="dashboard-tree-graph-node">{{node.label}}</span>
+            </template>
             <template let-node pTemplate="Group">
-       <span [title]="node.type" class="dashboard-tree-group-node">{{node.label}}</span>
-    </template>
+              <span [title]="node.type" class="dashboard-tree-group-node">{{node.label}}</span>
+            </template>
             <template let-node pTemplate="Metrics">
-       <span [title]="node.type" class="dashboard-tree-metrics-node">{{node.label}}</span>
-    </template>
+              <span [title]="node.type" class="dashboard-tree-metrics-node">{{node.label}}</span>
+            </template>
             <template let-node pTemplate="Tier">
-       <span [title]="node.type" class="dashboard-tree-tier-node">{{node.label}}</span>
-    </template>
+              <span [title]="node.type" class="dashboard-tree-tier-node">{{node.label}}</span>
+            </template>
             <template let-node pTemplate="Server">
-       <span [title]="node.type" class="dashboard-tree-server-node">{{node.label}}</span>
-    </template>
+              <span [title]="node.type" class="dashboard-tree-server-node">{{node.label}}</span>
+            </template>
             <template let-node pTemplate="Instance">
-       <span [title]="node.type" class="dashboard-tree-instance-node">{{node.label}}</span>
-    </template>
+              <span [title]="node.type" class="dashboard-tree-instance-node">{{node.label}}</span>
+            </template>
             <template let-node pTemplate="Interface">
-       <span [title]="node.type" class="dashboard-tree-interface-node">{{node.label}}</span>
-    </template>
+              <span [title]="node.type" class="dashboard-tree-interface-node">{{node.label}}</span>
+            </template>
         </p-tree>
     </div>
 </perfect-scrollbar>

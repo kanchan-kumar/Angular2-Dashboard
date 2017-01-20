@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { DashboardDataContainerService } from '../../services/dashboard-data-container.service';
-import { Logger } from 'angular2-logger/core';
+import { Logger } from '../../../../../vendors/angular2-logger/core';
 import { Subscription }   from 'rxjs/Subscription';
 import { DashboardWidgetDataService } from '../../services/dashboard-widget-data.service';
 import { Widget } from '../../containers/widget';
@@ -8,6 +8,7 @@ import { WidgetConfiguration } from '../../containers/widget-configuration';
 import { FAVORITE_DATA_UPDATE_AVAILABLE } from '../../constants/actions.constants';
 import { WidgetActionInputs } from '../../containers/widget-action-inputs';
 import { WIDGET_MAXIMIZE, WIDGET_MINIMIZE, WIDGET_CLOSE } from '../../constants/actions.constants';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'dashboard-right-panel-container',
@@ -36,6 +37,13 @@ export class DashboardRightPanelContainerComponent implements OnInit, OnDestroy 
 
   constructor(private log: Logger, private _dataService: DashboardDataContainerService,
   private _widgetService: DashboardWidgetDataService) {
+
+     /* Getting window resize event. */
+     Observable.fromEvent(window, 'resize')
+        .debounceTime(3000)
+        .subscribe((event) => {
+          this.onWindowResize(event);
+        });
   }
 
   ngOnInit() {
@@ -133,17 +141,19 @@ export class DashboardRightPanelContainerComponent implements OnInit, OnDestroy 
     this.dataSubscription.unsubscribe();
   }
 
-  @HostListener('window:resize', ['$event'])
   onWindowResize(event) {
     try {
       this.log.debug('window resized.', event);
       /* Need to apply Observable cancellation logic here. */
       /* Re calculate colWidth of widget here. */
       /* Now updating column width and row height based on inputs. */
-      let colWidth = window.innerWidth / this.layoutSettings.visible_cols;
+      let cols = window.innerWidth / this.layoutSettings.col_width; //this.layoutSettings.visible_cols;
 
      /* Setting column width of each widget. */
-     this.layoutSettings.col_width = colWidth - 12;
+     this.layoutSettings.visible_cols = cols;
+
+     //this.layoutSettings.
+
     } catch (e) {
       this.log.error('Error while handling window resize event.', e);
     }

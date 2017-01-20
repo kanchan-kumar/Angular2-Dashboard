@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DashboardMenuNavigatorService } from '../../services/dashboard-menu-navigator.service';
 import { DashboardDataContainerService } from '../../services/dashboard-data-container.service';
-import { Logger } from 'angular2-logger/core';
+import { Logger } from '../../../../../vendors/angular2-logger/core';
 import { Subscription }   from 'rxjs/Subscription';
 import { DashboardDataUtilsService } from '../../services/dashboard-data-utils.service';
 import { CLOSE_TREE_SIDENAV, INCREASE_TREE_SIDENAV, DECREASE_TREE_SIDENAV } from '../../constants/actions.constants';

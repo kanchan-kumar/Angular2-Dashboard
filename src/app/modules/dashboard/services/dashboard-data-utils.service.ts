@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Logger } from 'angular2-logger/core';
+import { Logger } from '../../../../vendors/angular2-logger/core';
 import { DashboardMenuDef } from '../containers/dashboard-menu-def';
 import { FavoriteTreeNodeInfo } from '../interfaces/favorite-tree-node-info';
 import { TreeNodeInfo } from '../interfaces/tree-node-info';
@@ -102,6 +102,7 @@ export class DashboardDataUtilsService {
         treeNode.nodeType = treeNodeInfo[i].nodeType;
         treeNode.type = treeNodeInfo[i].type;
         treeNode.label = treeNodeInfo[i].text;
+        treeNode.groupTypeVector = treeNodeInfo[i].groupTypeVector;
 
         /*Checking for parent hierarchy. */
         if (parentHierarchy === null) {
@@ -132,6 +133,11 @@ export class DashboardDataUtilsService {
             break;
           default:
             treeNode.icon = 'fa-check';
+        }
+
+        /*Checking if current node has sub nodes. */
+        if (Array.isArray(treeNodeInfo[i].children)) {
+          treeNode.children = this.getRequiredTreeDataFormat(treeNodeInfo[i].children, treeNode.data);
         }
 
         /* checking for leaf node. */

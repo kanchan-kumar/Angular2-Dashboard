@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, NgZone } from '@angular/core';
 import { DashboardMenuNavigatorService } from '../../services/dashboard-menu-navigator.service';
 import { DashboardDataContainerService } from '../../services/dashboard-data-container.service';
-import { Logger } from 'angular2-logger/core';
+import { Logger } from '../../../../../vendors/angular2-logger/core';
 import { DashboardMenuDef } from '../../containers/dashboard-menu-def';
 import { DashboardNavMenu } from '../../containers/dashboard-nav-menu';
 import { Subscription }   from 'rxjs/Subscription';

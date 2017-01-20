@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DashboardDataContainerService } from './dashboard-data-container.service';
-import { Logger } from 'angular2-logger/core';
+import { Logger } from '../../../../vendors/angular2-logger/core';
 import { WidgetConfiguration } from '../containers/widget-configuration';
 import { Widget } from '../containers/widget';
 import { WidgetInfo } from '../interfaces/widget-info';

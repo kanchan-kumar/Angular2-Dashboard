@@ -1,6 +1,5 @@
-import {MenuItem} from 'primeng/primeng';
 
-export class DashboardMenuDef implements MenuItem {
+export class DashboardMenuDef {
  label: string = null;
  icon: string = null;
  items: DashboardMenuDef[] = null;

@@ -201,4 +201,40 @@ export class DashboardNavMenu {
       return null;
     }
   }
+
+  /** Getting Menu for Tree Right Click */
+  getTreeMenuByLevel(node, onTreeMenuClick) {
+    try {
+      let merge = new DashboardMenuDef('Merge with Selected Panel', 'fa-refresh', null, onTreeMenuClick);
+      let openMerge = new DashboardMenuDef('Open/Merge Members', 'fa-share-square', null, onTreeMenuClick);
+      let openAllMember = new DashboardMenuDef('Open All Members', 'fa-share-square', null, onTreeMenuClick);
+      let mergeAllMember = new DashboardMenuDef('Merge All Members', 'fa-share-square', null, onTreeMenuClick);
+
+      /* Tree Menu Array. */
+      let treeMenuArray = new Array<DashboardMenuDef>();
+
+      /* For Scaler Groups. */
+      if (node.nodeType === 1 && !node.groupTypeVector) {
+        treeMenuArray.push(openAllMember);
+        return treeMenuArray;
+      } else if (node.lastHierarchicalComponent && node.nodeType === 2) {
+        treeMenuArray.push(openMerge);
+        treeMenuArray.push(openAllMember);
+        treeMenuArray.push(mergeAllMember);
+        return treeMenuArray;
+      } else if (node.type === 'Graph') {
+        treeMenuArray.push(merge);
+        treeMenuArray.push(openMerge);
+        treeMenuArray.push(openAllMember);
+        treeMenuArray.push(mergeAllMember);
+        return treeMenuArray;
+      } else {
+        return null;
+      }
+
+    } catch (e) {
+      console.error(e);
+      return null;
+    }
+  }
 }

@@ -1,9 +1,13 @@
+<!-- Panel Setting Menu. -->
+<!-- -->
+<p-contextMenu #menu [model]="widgetMenuItems"></p-contextMenu>
+
 <div #widgetRef [(ngGridItem)]="widget" [ngClass]="widgetClasses" (onChangeStop)="onChangeStop($event)">
     <div *ngIf="panelData.isHeaderReq" class="dashboard-panel-header-color dashboard-panel-header dashboard-drag-panel" (click)='onWidgetSelection($event)'>
         <div class="ui-helper-clearfix label-font">
             <span class="ui-panel-title">{{panelData.panelTitle}}</span>
             <md-icon class="dashboard-panel-close-icon panel-action-button" fontSet='fa' title='Close Widget' fontIcon='fa-times' (click)="onWidgetClose($event)"></md-icon>
-            <md-icon class="dashboard-panel-setting-icon panel-action-button" fontSet='fa' title='Open Widget Settings' fontIcon='fa-cog' (click)="closeWidget($event)"></md-icon>
+            <md-icon class="dashboard-panel-setting-icon panel-action-button" fontSet='fa' title='Open Widget Settings' fontIcon='fa-cog' (click)="menu.toggle($event)"></md-icon>
             <md-icon class="dashboard-panel-expand-icon panel-action-button" fontSet='fa' title='Maximize Widget' fontIcon='fa-expand' (click)="onWidgetMaximize($event)"></md-icon>
         </div>
     </div>
@@ -23,7 +27,7 @@
                 <md-card-footer class="dashboard-data-widget-footer">
                     {{panelData.panelTitle}}
                     <span class="dashboard-data-widget-action">
-                        <md-icon class="dashboard-panel-setting-icon panel-action-button" fontSet='fa' title='Open Widget Settings' fontIcon='fa-cog' (click)="closeWidget()"></md-icon>
+                        <md-icon class="dashboard-panel-setting-icon panel-action-button" fontSet='fa' title='Open Widget Settings' fontIcon='fa-cog' (click)="menu.toggle($event)"></md-icon>
                     </span>
                 </md-card-footer>
             </md-card>

@@ -1,4 +1,4 @@
-import { NgGridConfig } from  'angular2-grid/src/interfaces/INgGrid';
+import { NgGridConfig } from  '../../../../vendors/angular2-grid/src/interfaces/INgGrid';
 
 export class WidgetConfiguration implements NgGridConfig  {
     margins?: number[];

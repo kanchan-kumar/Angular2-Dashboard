@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
-import { Logger } from 'angular2-logger/core';
+import { Logger } from '../../../../vendors/angular2-logger/core';
 
 @Injectable()
 export class ProgressBarService {

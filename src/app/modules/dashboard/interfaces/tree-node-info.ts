@@ -1,7 +1,7 @@
 import { TreeNodeStateInfo } from './tree-node-state-info';
 
 export interface TreeNodeInfo {
-  children: boolean;
+  children: any;
   graphID: number;
   groupID: number;
   lastHierarchicalComponent: boolean;
@@ -9,4 +9,5 @@ export interface TreeNodeInfo {
   state: TreeNodeStateInfo;
   text: string;
   type: string;
+  groupTypeVector: boolean;
 }

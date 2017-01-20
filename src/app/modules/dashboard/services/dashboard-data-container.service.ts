@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Logger } from 'angular2-logger/core';
+import { Logger } from '../../../../vendors/angular2-logger/core';
 import { DashboardFavoriteData } from '../interfaces/dashboard-favorite-data';
 import { Subject } from 'rxjs/Subject';
 import { FAVORITE_DATA_UPDATE_AVAILABLE, FAVORITE_TREE_UPDATE_AVAILABLE, STANDARD_TREE_DATA_AVAILABLE }
