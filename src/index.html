@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<style type="text/css">
+    div#preloader {
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 999;
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+        background: #333 url('../images/loading.gif') no-repeat center center;
+    }
+</style>
+
+<head>
+    <meta charset="utf-8">
+    <title>Angular2Dashboard</title>
+    <base href="/">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+
+<body>
+    <dashboard-loading>
+        <div id="preloader"> Loading Dashboard Application. Please Wait ... </div>
+    </dashboard-loading>
+</body>
+
+</html>

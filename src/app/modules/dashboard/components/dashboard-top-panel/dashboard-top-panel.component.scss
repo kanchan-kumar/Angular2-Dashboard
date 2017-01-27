@@ -1,0 +1,40 @@
+.dashboard-top-panel {
+    border: 1px solid black;
+    md-toolbar {
+        padding: 4px;
+        min-height: 30px;
+        height: 30px;
+    }
+    md-toolbar /deep/ md-toolbar-row {
+        padding: 4px;
+        min-height: 30px;
+        height: 30px;
+    }
+}
+
+.dashboard-toolbar-filler {
+    flex: 1 1 auto;
+}
+
+.dashboard-nav-button {
+    min-width: 20px;
+    line-height: 20px;
+    padding-right: 10px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+}
+
+.dashboard-top-nav-icon {
+    width: 15px;
+    font-size: 17px;
+    height: 22px;
+}
+
+.ui-widget {
+    font-size: 13px;
+}
+
+.dashboard-top-panel-fav-option {
+    margin-bottom: 10px;
+    margin-right: 10px;
+}

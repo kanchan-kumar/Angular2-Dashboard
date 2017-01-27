@@ -1,0 +1,30 @@
+export class ChartTooltip {
+  animation: boolean = false;
+  borderRadius: number = 3;
+  borderWidth: number = 1;
+  crosshairs: boolean = false;
+  dateTimeLabelFormats: Object = null;
+  enabled: boolean = true;
+  followPointer: boolean = false;
+  followTouchMove: boolean = false;
+  footerFormat: string = 'false';
+  formatter: Function = null;
+  headerFormat: string = null;
+  hideDelay: number = 500;
+  padding: number = 8;
+  pointFormat: string = null;
+  pointFormatter: any = null;
+  positioner: any = null;
+  shadow: boolean = false;
+  shape: string = 'callout';
+  shared: boolean = false;
+  snap: number = 10;
+  split: boolean = false;
+  style: any = null;
+  useHTML: boolean = true;
+  valueDecimals: number = 3;
+  valuePrefix: string = null;
+  valueSuffix: string = null;
+  xDateFormat: string = null;
+  delayForDisplay: number = 2000;
+}

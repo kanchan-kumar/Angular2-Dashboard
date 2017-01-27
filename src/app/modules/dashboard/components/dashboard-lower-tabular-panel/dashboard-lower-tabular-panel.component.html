@@ -1,0 +1,35 @@
+<div style="margin-left: 5px; margin-right: 5px;">
+    <p-toolbar>
+        <div class="ui-toolbar-group-left">
+        </div>
+        <div class="ui-toolbar-group-right">
+            <button pButton type="button" icon="fa-refresh"></button>
+            <button pButton type="button" icon="fa fa-bars"></button>
+        </div>
+    </p-toolbar>
+
+    <p-dataTable [value]="tabularData.tableData" [resizableColumns]='true' [filterDelay]='1000' [style]="{'min-height': '100px'}" [rows]="tabularData.visibleRowPerPage" [paginator]="true" [pageLinks]="tabularData.visiblePageLinks" [rowsPerPageOptions]="tabularData.rowsPerPageOptions">
+        <!-- Selection Mode based on condition. -->
+        <p-column *ngFor="let column of tabularData.tableColumns" [field]="column.field" [header]="column.header" [sortable]="column.sortable" [filter]="column.filter" [style]="column.style">
+            <!-- For Other columns. -->
+            <template let-col let-data="rowData" pTemplate="body">
+               <div class='table-text-align-right' [title]="data[col.field]">{{data[col.field]}}</div>
+            </template>
+            <!-- For Checkbox columns. -->
+            <template *ngIf="column.header === 'checkbox'" pTemplate="header">
+               <div class='table-text-align-center'> <p-checkbox  binary="true" [(ngModel)]="tabularData.allRowsSelected" (onChange)="onAllRowSelectionChange($event);"></p-checkbox> </div>
+            </template>
+            <template *ngIf="column.header === 'checkbox'" let-col let-data="rowData" pTemplate="body">
+               <div class='table-text-align-center'> <p-checkbox [value]="data['#']" [(ngModel)]="tabularData.tableSelectedRows" (onChange)="onRowSelectionChange($event);"></p-checkbox> </div>
+            </template>
+            <!-- For Color columns. -->
+            <template *ngIf="column.field === 'color'" let-col let-data="rowData" pTemplate="body">
+               <div class='table-text-align-center' [ngStyle]="{'background-color': data[col.field]}">&nbsp;</div>
+            </template>
+            <!-- For Name columns. -->
+            <template *ngIf="column.field === 'metricName'" let-col let-data="rowData" pTemplate="body">
+               <div class='table-text-align-left' [title]="data[col.field]">{{data[col.field]}}</div>
+            </template>
+        </p-column>
+    </p-dataTable>
+</div>

@@ -1,0 +1,36 @@
+<!-- Panel Setting Menu. -->
+<!-- -->
+<p-contextMenu #menu [model]="widgetMenuItems"></p-contextMenu>
+
+<div #widgetRef [(ngGridItem)]="widget" [ngClass]="widgetClasses" (onChangeStop)="onChangeStop($event)">
+    <div *ngIf="panelData.isHeaderReq" class="dashboard-panel-header-color dashboard-panel-header dashboard-drag-panel" (click)='onWidgetSelection($event)'>
+        <div class="ui-helper-clearfix label-font">
+            <span class="ui-panel-title">{{panelData.panelTitle}}</span>
+            <md-icon class="dashboard-panel-close-icon panel-action-button" fontSet='fa' title='Close Widget' fontIcon='fa-times' (click)="onWidgetClose($event)"></md-icon>
+            <md-icon class="dashboard-panel-setting-icon panel-action-button" fontSet='fa' title='Open Widget Settings' fontIcon='fa-cog' (click)="menu.toggle($event)"></md-icon>
+            <md-icon class="dashboard-panel-expand-icon panel-action-button" fontSet='fa' title='Maximize Widget' fontIcon='fa-expand' (click)="onWidgetMaximize($event)"></md-icon>
+        </div>
+    </div>
+    <div class="dashboard-panel-data">
+        <!-- Template for graph type widget. -->
+        <div *ngIf="widget.widgetType == 1" class="dashboard-graph-widget" (dblclick)="onWidgetMaximize($event)">
+            <chart #HChart [options]="panelData.chart" (load)="load($event.context)"></chart>
+        </div>
+        <!-- Template for data type widget. -->
+        <div *ngIf="widget.widgetType == 2" (click)='onWidgetSelection($event)'>
+            <md-card [style.height]="panelData.dataWidget.dataWidgetHeight" class='dashboard-data-widget dashboard-drag-panel'>
+                <md-card-title-group>
+                    <md-icon class="dashboard-data-widget-icon" [style.fontSize]="panelData.dataWidget.dataWidgetImgSize" [style.color]="panelData.dataWidget.graphColor">{{panelData.dataWidget.dataAttrIconName}}</md-icon>
+                    <md-card-title class="dashboard-data-widget-title">{{panelData.dataWidget.dataAttrDisplayName}}</md-card-title>
+                    <md-card-subtitle class="dashboard-data-widget-subtitle">{{panelData.dataWidget.dataAttrValue}}</md-card-subtitle>
+                </md-card-title-group>
+                <md-card-footer class="dashboard-data-widget-footer">
+                    {{panelData.panelTitle}}
+                    <span class="dashboard-data-widget-action">
+                        <md-icon class="dashboard-panel-setting-icon panel-action-button" fontSet='fa' title='Open Widget Settings' fontIcon='fa-cog' (click)="menu.toggle($event)"></md-icon>
+                    </span>
+                </md-card-footer>
+            </md-card>
+        </div>
+    </div>
+</div>

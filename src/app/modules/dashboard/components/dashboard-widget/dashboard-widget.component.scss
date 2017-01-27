@@ -1,0 +1,73 @@
+.panel-action-button {
+    float: right;
+    cursor: pointer;
+}
+
+.dashboard-panel {
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.dashboard-panel-selected {
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    box-shadow: 0px 0px 30px;
+}
+
+.dashboard-panel-header {
+    height: 15px;
+    overflow: hidden;
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    padding: 3px;
+}
+
+md-icon {
+    height: 12px;
+    width: 12px;
+    font-size: 13px;
+}
+
+.dashboard-panel-close-icon {}
+
+.dashboard-drag-panel {}
+
+.dashboard-panel-setting-icon {
+    padding-right: 5px;
+}
+
+.dashboard-panel-expand-icon {
+    padding-right: 5px;
+}
+
+.dashboard-data-widget {
+    font-size: 12px;
+    padding-left: 15px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.dashboard-data-widget-title {
+    font-size: 18px;
+}
+
+.dashboard-data-widget-subtitle {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.dashboard-data-widget-icon {
+    font-size: 4em;
+    font-style: italic;
+    height: 30px;
+    width: 30px;
+    padding-right: 15px;
+}
+
+.dashboard-data-widget-footer {
+    padding-bottom: 5px;
+    padding-left: 2px;
+    padding-right: 2px;
+}

@@ -1,0 +1,114 @@
+@import '~@angular/material/core/theming/all-theme';
+//NOTE: Theming is currently experimental and not yet publically released!
+@include md-core();
+$primary: md-palette($md-deep-purple);
+$accent: md-palette($md-amber, A200, A100, A400);
+$theme: md-light-theme($primary, $accent);
+@include angular-material-theme($theme);
+md-sidenav {
+    background: black;
+}
+
+md-sidenav md-icon {
+    color: white;
+}
+
+md-sidenav div {
+    color: white;
+}
+
+.dashboard-panel-header-color {
+    color: black;
+    border-color: black;
+    background: rgba(121, 121, 185, 0.12);
+}
+
+.dashboard-panel-color {
+    background: rgb(223, 234, 232);
+}
+
+.dashboard-panel-selected-color {
+    border-color: black;
+}
+
+.ui-panelmenu-content {
+    background: rgba(217, 226, 226, 0.99);
+}
+
+.dashboard-nav-panel-menu .ui-panelmenu-header {
+    background: rgba(217, 226, 226, 0.99);
+}
+
+.dashboard-nav-panel-menu div {
+    color: black;
+}
+
+
+/*First level node css.*/
+
+.dashboard-tree-graph-node {
+    color: khaki;
+}
+
+.dashboard-tree-group-node {
+    color: rgb(41, 228, 239);
+}
+
+.dashboard-tree-metrics-node {
+    color: blanchedalmond;
+}
+
+.dashboard-tree-tier-node {
+    color: cornsilk;
+}
+
+.dashboard-tree-server-node {
+    color: azure;
+}
+
+.dashboard-tree-instance-node {
+    color: gold;
+}
+
+.dashboard-tree-interface-node {
+    color: yellow;
+}
+
+.dashboard-tree-input-icon {
+    background: transparent;
+}
+
+.md-select-value {
+    color: white;
+}
+
+.md-select-trigger {
+    color: white;
+}
+
+.md-select-arrow {
+    color: white;
+}
+
+
+/*For Single Prime UI panel.*/
+
+.ui-panel .ui-panel-content {
+    background: rgb(223, 234, 232);
+}
+
+md-sidenav {
+    background: transparent;
+}
+
+.md-sidenav-container {
+    background: transparent;
+}
+
+md-card {
+    background: transparent;
+}
+
+body {
+    background: url(images/background.jpg) repeat;
+}

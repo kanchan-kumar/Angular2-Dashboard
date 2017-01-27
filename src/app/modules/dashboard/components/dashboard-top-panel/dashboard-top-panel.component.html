@@ -1,0 +1,24 @@
+<div class="dashboard-top-panel">
+    <md-toolbar color="primary">
+        <!-- Left Menu Navigation. -->
+        <md-icon fontSet="fa" title="Toggle Menu Navigation Panel" fontIcon="fa-bars" (click)='onMenuNavToggle()'></md-icon>
+        <!-- GDF Tree Menu Navigation. -->
+        <md-icon fontSet="fa" title="Toggle Tree Navigation Panel" fontIcon="fa-bar-chart" (click)='onTreeNavToggle()'></md-icon>
+
+        <!-- Spacing between top menu. -->
+        <span class="dashboard-toolbar-filler"></span>
+
+        <!-- Top Panel Information -->
+
+        <!-- Favorite Icon -->
+        <!-- <md-icon fontSet='fa' fontIcon='fa-star' class='dashboard-top-nav-icon'></md-icon>
+        <p-menu #favMenu popup='popup' [model]='favOptions'>Favorites</p-menu>
+        <button md-button class='dashboard-nav-button' (click)="favMenu.toggle($event)"> Favorites </button> -->
+        <p-splitButton label="Favorites" icon="fa-star" (onClick)="onFavClickAction($event)" [model]="favOptions" class="dashboard-top-panel-fav-option"></p-splitButton>
+
+        <!-- Last Sample Time -->
+        <md-icon fontSet='fa' fontIcon='fa-clock-o' class='dashboard-top-nav-icon'></md-icon>
+        <button md-button class='dashboard-nav-button'>{{ lastSampleTime | date:'MM/dd/yyyy HH:mm:ss' }}</button>
+
+    </md-toolbar>
+</div>

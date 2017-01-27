@@ -1,0 +1,31 @@
+<!-- Top Panel of Dashboard -->
+<dashboard-top-panel> </dashboard-top-panel>
+
+<!-- Main Page Structure. -->
+<md-sidenav-container class="dashboard-sidenav-layout">
+
+    <!-- Left Side Menu Navigation Panel Component. -->
+    <md-sidenav #navSideBar mode='side' opened=false color='primary' [ngStyle]="{'width': navWidth+'px'}">
+        <!-- Left Panel of Dashboard -->
+        <dashboard-menu-nav-panel></dashboard-menu-nav-panel>
+    </md-sidenav>
+
+    <!-- Right Side GDF Tree Panel Component. -->
+    <md-sidenav align="end" #navTreeSideBar mode='side' opened=false color='primary' [ngStyle]="{'width': navTreeWidth+'px'}">
+        <!-- Left Panel of Dashboard -->
+        <dashboard-tree-panel></dashboard-tree-panel>
+    </md-sidenav>
+
+    <!-- Scroll Component. -->
+    <perfect-scrollbar>
+        <section [ngStyle]="{'height': contentHeight+'px'}">
+            <!-- Routed views go here. When routing goes through Menu Navigation. -->
+            <router-outlet></router-outlet>
+        </section>
+    </perfect-scrollbar>
+
+    <!-- Lower panel. -->
+    <section>
+        <dashboard-lower-tabular-panel></dashboard-lower-tabular-panel>
+    </section>
+</md-sidenav-container>
