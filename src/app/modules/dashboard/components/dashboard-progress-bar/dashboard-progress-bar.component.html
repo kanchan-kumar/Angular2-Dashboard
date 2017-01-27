@@ -1,4 +1,0 @@
-<p-dialog class="progressBarHeader" header="Please wait ..." [(visible)]="display" modal="modal" width="400" responsive="true" draggable="false" resizable="false" minWidth="200" minHeight="100" height="auto" closeOnEscape="false" closable="true" (onAfterHide)="onAfterHide($event)">
-    <p class='progressBarMsg'>{{message}}</p>
-    <p-progressBar [value]="progressValue | round"></p-progressBar>
-</p-dialog>

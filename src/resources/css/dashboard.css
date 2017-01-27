@@ -1,0 +1,237 @@
+@charset "UTF-8";
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/roboto-v15-latin-regular.eot');
+    /* IE9 Compat Modes */
+    src: local('Roboto'), local('Roboto-Regular'), url('../fonts/roboto-v15-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('../fonts/roboto-v15-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+    url('../fonts/roboto-v15-latin-regular.woff') format('woff'), /* Modern Browsers */
+    url('../fonts/roboto-v15-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+    url('../fonts/roboto-v15-latin-regular.svg#Roboto') format('svg');
+    /* Legacy iOS */
+}
+
+
+/* --------------------------------------- ScrollBar CSS -----------------------------------*/
+
+.scroll {
+    width: 20px;
+    height: 200px;
+    overflow: auto;
+    float: left;
+}
+
+.scroll_content::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.scroll_content::-webkit-scrollbar-thumb {
+    background: #666;
+    border-radius: 20px;
+}
+
+.scroll_content::-webkit-scrollbar-track {
+    background: #ddd;
+    border-radius: 20px;
+}
+
+
+/* Let's get this party started */
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+
+/* Track */
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px #ddd;
+    box-shadow: inset 0 0 6px #ddd;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: #ddd;
+    -webkit-box-shadow: inset 0 0 6px #666;
+    box-shadow: inset 0 0 6px #ddd;
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+    background: #ddd;
+}
+
+
+/* -------------------------------------- Common CSS for font-size ----------------------------------*/
+
+.label-font {
+    font-size: 12px;
+}
+
+
+/* ---------------------------------------------------- UI Grid CSS --------------------------------------------------------- */
+
+.grid {
+    position: relative;
+}
+
+.grid-item {
+    position: absolute;
+}
+
+.grid-item.moving {
+    z-index: z-index + 1;
+}
+
+.placeholder {
+    position: absolute;
+}
+
+
+/*  ----------------------------------------------------Prime NG Global CSS ------------------------------------------------- */
+
+body {
+    margin: 0px;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    font-family: 'Roboto', "Trebuchet MS", Arial, Helvetica, sans-serif;
+    font-weight: normal;
+    color: #404C51;
+    -webkit-font-smoothing: antialiased;
+    font-size: 0.8em;
+}
+
+
+/*Prime NG components CSS. Please don't include color here.*/
+
+.ui-widget .ui-widget {
+    font-size: 12px;
+}
+
+.ui-menu .ui-menuitem-link {
+    line-height: 12px;
+}
+
+.ui-menu {
+    width: 8.5em;
+}
+
+.ui-panel .ui-panel-titlebar {
+    padding: 0px;
+}
+
+.progressBarHeader .ui-dialog.ui-widget .ui-dialog-titlebar {
+    padding: 1px;
+    font-weight: bold;
+    padding-left: 5px;
+}
+
+.dashboard-nav-panel-menu {}
+
+.dashboard-nav-panel-menu .ui-panelmenu-header>a {
+    padding: 1.25em .5em;
+}
+
+.dashboard-nav-panel-menu .ui-panelmenu-content {
+    font-size: 14px;
+}
+
+.dashboard-nav-panel-menu .ui-menuitem {
+    box-shadow: 0px 0px 1px;
+}
+
+.dashboard-nav-panel-menu .ui-menuitem-icon {
+    font-size: 22px;
+    width: 30px;
+}
+
+.dashboard-nav-panel-menu .ui-panelmenu-icon {
+    font-size: 20px;
+}
+
+.dashboard-nav-panel-menu .ui-menuitem-text {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.dashboard-nav-panel-menu .ui-panelmenu-panel {
+    box-shadow: 2px 3px 2px;
+    margin: 2px;
+}
+
+.dashboard-nav-panel-menu .ui-panelmenu-content .ui-menuitem-text {
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.dashboard-nav-panel-menu .ui-panelmenu-content .ui-panelmenu-icon {
+    font-size: 12px;
+}
+
+.dashboard-tree-context-menu {
+    width: 180px;
+}
+
+.ui-tree {
+    background: transparent;
+    border: 0px;
+    width: 100%;
+}
+
+.ui-datatable-emptymessage {
+    text-align: center;
+}
+
+.dashboard-lower-panel-table {
+    min-height: 100px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.table-text-align-right {
+    padding-right: 2px;
+    text-align: right;
+}
+
+.table-text-align-left {
+    padding-left: 2px;
+    text-align: left;
+}
+
+.table-text-align-center {
+    text-align: center;
+}
+
+
+/*  ---------------------------------------------------- Material Global CSS ------------------------------------------------- */
+
+md-sidenav .ui-tieredmenu {
+    margin-left: 30px;
+    max-height: 400px;
+}
+
+md-sidenav .ui-menu .ui-menu-parent .ui-menu-child {
+    max-height: 400px;
+}
+
+md-card-title-text {
+    font-size: 18px;
+}
+
+.dashboard-tree-component .md-tab-label {
+    min-width: 50px;
+}
+
+md-option {
+    height: 30px
+}
